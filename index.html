@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bulldog Vigos — Francés & Inglés · Ciudad de México</title>
+  <style>
+    :root {
+      --navy:    #0d1117;
+      --navy2:   #111827;
+      --navy3:   #1a2340;
+      --gold:    #c9a84c;
+      --gold2:   #e8c96a;
+      --burg:    #8b1a2f;
+      --cream:   #f5e6c8;
+      --muted:   rgba(245,230,200,.55);
+      --border:  rgba(201,168,76,.14);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy); color: var(--cream); font-family: 'Georgia', serif; overflow-x: hidden; }
+    img  { display: block; max-width: 100%; }
+    a    { text-decoration: none; color: inherit; }
+
+    /* ── Utilities ── */
+    .gold      { color: var(--gold); }
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 28px; }
+    .tag {
+      display: inline-block;
+      font-family: 'Courier New', monospace;
+      font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--gold); border: 1px solid rgba(201,168,76,.4);
+      padding: 4px 14px; border-radius: 2px; margin-bottom: 20px;
+    }
+    section { padding: 110px 0; }
+    .section-header { text-align: center; margin-bottom: 70px; }
+    .section-title  { font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.12; margin-bottom: 18px; }
+    .section-sub    { font-size: 1.05rem; line-height: 1.75; color: var(--muted); max-width: 560px; margin: 0 auto; }
+
+    /* ══════════ NAVBAR ══════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 44px;
+      background: rgba(13,17,23,.8); backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(201,168,76,.1);
+      transition: padding .3s, background .3s;
+    }
+    nav img { height: 52px; width: auto; }
+    .nav-links { display: flex; gap: 36px; list-style: none; font-size: .88rem; letter-spacing: .07em; }
+    .nav-links a { color: var(--cream); transition: color .2s; position: relative; }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0;
+      width: 0; height: 1px; background: var(--gold); transition: width .3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: var(--burg); color: var(--cream) !important;
+      padding: 8px 22px; border-radius: 3px; letter-spacing: .1em;
+      transition: background .2s, transform .2s !important;
+    }
+    .nav-cta:hover { background: #a82238 !important; transform: translateY(-1px); }
+    .nav-cta::after { display: none !important; }
+
+    /* ══════════ VIDEO HERO (scroll scrub) ══════════ */
+    #video-scene {
+      position: relative;
+      /* height controla cuánto scroll dura el efecto — más = más lento */
+      height: 220vh;
+    }
+    #video-sticky {
+      position: sticky; top: 0;
+      width: 100%; height: 100vh;
+      overflow: hidden;
+    }
+    #hero-video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .video-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(13,17,23,.35) 0%,
+        rgba(13,17,23,.1) 40%,
+        rgba(13,17,23,.55) 80%,
+        rgba(13,17,23,1) 100%
+      );
+    }
+    .video-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 0 24px;
+      padding-top: 80px;
+    }
+    .video-logo {
+      width: 200px; margin: 0 auto 28px;
+      filter: drop-shadow(0 0 50px rgba(201,168,76,.5));
+    }
+    .video-eyebrow {
+      font-family: 'Courier New', monospace;
+      font-size: .78rem; letter-spacing: .32em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 22px;
+    }
+    .video-title {
+      font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+      font-weight: 700; line-height: 1.08;
+      color: #fff; text-shadow: 0 2px 30px rgba(0,0,0,.5);
+      margin-bottom: 24px;
+    }
+    .video-title em { font-style: italic; color: var(--gold2); }
+    .video-sub {
+      font-size: 1.15rem; line-height: 1.7;
+      color: rgba(255,255,255,.75); max-width: 520px; margin: 0 auto 42px;
+    }
+    .btn-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 15px 34px; border-radius: 3px;
+      font-size: .95rem; letter-spacing: .08em; font-family: 'Georgia', serif;
+      cursor: pointer; transition: all .25s; border: none;
+    }
+    .btn-gold   { background: var(--gold); color: var(--navy); font-weight: 700; }
+    .btn-gold:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,168,76,.4); }
+    .btn-ghost  { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.35); }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    .scroll-hint {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      font-size: .7rem; letter-spacing: .22em; text-transform: uppercase;
+      color: rgba(201,168,76,.7); animation: bounce 2.2s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%      { transform: translateX(-50%) translateY(7px); }
+    }
+
+    /* ══════════ INTRO BRAND ══════════ */
+    #intro { background: var(--navy); }
+    .intro-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .intro-text .tag { display: block; }
+    .intro-title { font-size: clamp(1.9rem, 3.5vw, 3rem); line-height: 1.15; margin-bottom: 22px; }
+    .intro-body p {
+      font-size: 1rem; line-height: 1.85; color: var(--muted); margin-bottom: 18px;
+    }
+    .intro-body p:last-child { margin-bottom: 0; }
+    .intro-visual {
+      position: relative; border-radius: 6px; overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .intro-placeholder {
+      aspect-ratio: 4/5;
+      background: linear-gradient(135deg, rgba(139,26,47,.25) 0%, rgba(26,35,64,.9) 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 14px; color: rgba(201,168,76,.4); font-size: .78rem; letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+    .intro-placeholder svg { width: 64px; height: 64px; opacity: .3; }
+    .intro-badge {
+      position: absolute; bottom: 24px; left: 24px;
+      background: rgba(13,17,23,.9); border: 1px solid var(--border);
+      backdrop-filter: blur(8px); border-radius: 4px;
+      padding: 14px 20px; display: flex; align-items: center; gap: 12px;
+    }
+    .badge-dot { width: 10px; height: 10px; background: #25D366; border-radius: 50%; flex-shrink: 0; animation: pulse 2s infinite; }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(37,211,102,.5); }
+      50%      { box-shadow: 0 0 0 6px rgba(37,211,102,0); }
+    }
+    .badge-text { font-size: .8rem; line-height: 1.5; color: var(--muted); }
+    .badge-text strong { color: var(--cream); font-size: .9rem; }
+
+    /* ══════════ RAZAS ══════════ */
+    #razas { background: var(--navy2); }
+    .razas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(460px, 1fr)); gap: 36px; }
+    .raza-card {
+      background: var(--navy); border: 1px solid var(--border); border-radius: 6px;
+      overflow: hidden; transition: transform .35s, box-shadow .35s;
+    }
+    .raza-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 24px 64px rgba(0,0,0,.55), 0 0 0 1px rgba(201,168,76,.28);
+    }
+    .raza-img {
+      width: 100%; aspect-ratio: 16/9;
+      background: linear-gradient(135deg, rgba(139,26,47,.3) 0%, rgba(26,35,64,.85) 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 12px; color: rgba(201,168,76,.4); font-size: .76rem;
+      letter-spacing: .15em; text-transform: uppercase;
+      border-bottom: 1px solid var(--border); position: relative; overflow: hidden;
+    }
+    .raza-img::before {
+      content: '';position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        45deg, transparent, transparent 20px,
+        rgba(201,168,76,.025) 20px, rgba(201,168,76,.025) 40px
+      );
+    }
+    .raza-img svg { width: 68px; height: 68px; opacity: .28; }
+    .raza-body { padding: 36px; }
+    .raza-badge {
+      display: inline-block; background: rgba(139,26,47,.2);
+      border: 1px solid rgba(139,26,47,.45); color: #e06880;
+      font-size: .7rem; letter-spacing: .15em; text-transform: uppercase;
+      padding: 3px 12px; border-radius: 2px; margin-bottom: 14px;
+    }
+    .raza-name { font-size: 2rem; color: var(--cream); margin-bottom: 14px; }
+    .raza-desc { font-size: .95rem; line-height: 1.8; color: var(--muted); margin-bottom: 24px; }
+    .raza-traits { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+    .trait {
+      background: rgba(201,168,76,.07); border: 1px solid rgba(201,168,76,.2);
+      color: var(--gold); font-size: .74rem; letter-spacing: .1em; padding: 4px 12px; border-radius: 2px;
+    }
+    .raza-detail {
+      background: rgba(26,35,64,.5); border-radius: 4px; padding: 18px 20px;
+      margin-bottom: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    }
+    .detail-item { font-size: .83rem; color: var(--muted); }
+    .detail-item strong { display: block; color: var(--cream); font-size: .9rem; margin-bottom: 2px; }
+    .raza-price { font-size: .9rem; color: var(--muted); margin-bottom: 22px; }
+    .raza-price strong { color: var(--gold); font-size: 1.05rem; }
+
+    /* ══════════ PROCESO ══════════ */
+    #proceso { background: var(--navy); }
+    .proceso-steps {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0;
+      position: relative;
+    }
+    .proceso-steps::before {
+      content: ''; position: absolute; top: 38px; left: 10%; right: 10%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: .25;
+    }
+    .step {
+      text-align: center; padding: 0 24px 40px;
+      position: relative;
+    }
+    .step-num {
+      width: 76px; height: 76px; margin: 0 auto 24px;
+      background: var(--navy2); border: 1px solid rgba(201,168,76,.3);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; position: relative; z-index: 1;
+      transition: border-color .3s, background .3s;
+    }
+    .step:hover .step-num { border-color: var(--gold); background: rgba(201,168,76,.07); }
+    .step-title { font-size: 1.1rem; color: var(--cream); margin-bottom: 10px; }
+    .step-desc  { font-size: .88rem; line-height: 1.75; color: var(--muted); }
+
+    /* ══════════ SERVICIOS ══════════ */
+    #servicios { background: var(--navy2); }
+    .servicios-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
+    .servicio-card {
+      padding: 42px 34px; background: rgba(26,35,64,.45);
+      border: 1px solid var(--border); border-radius: 6px;
+      position: relative; overflow: hidden; transition: border-color .3s, background .3s;
+    }
+    .servicio-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--burg), var(--gold));
+      opacity: 0; transition: opacity .3s;
+    }
+    .servicio-card:hover { border-color: rgba(201,168,76,.32); background: rgba(26,35,64,.75); }
+    .servicio-card:hover::before { opacity: 1; }
+    .serv-icon {
+      width: 60px; height: 60px; background: rgba(139,26,47,.18);
+      border: 1px solid rgba(139,26,47,.38); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; margin-bottom: 24px;
+    }
+    .serv-title { font-size: 1.3rem; color: var(--cream); margin-bottom: 14px; }
+    .serv-desc  { font-size: .92rem; line-height: 1.8; color: var(--muted); margin-bottom: 20px; }
+    .serv-list  { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .serv-list li { font-size: .85rem; color: var(--muted); display: flex; gap: 10px; align-items: flex-start; }
+    .serv-list li::before { content: '→'; color: var(--gold); flex-shrink: 0; }
+
+    /* ══════════ POR QUÉ ══════════ */
+    #porque { background: var(--navy); position: relative; overflow: hidden; }
+    #porque::after {
+      content: ''; position: absolute; bottom: -300px; left: -300px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(139,26,47,.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .porque-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: start; }
+    .porque-left .tag { display: block; }
+    .porque-left .section-title { text-align: left; margin-bottom: 16px; }
+    .porque-lead { font-size: 1.05rem; line-height: 1.8; color: var(--muted); margin-bottom: 40px; }
+    .porque-items { display: flex; flex-direction: column; gap: 28px; }
+    .pq-item { display: flex; gap: 18px; }
+    .pq-line { display: flex; flex-direction: column; align-items: center; gap: 0; }
+    .pq-dot  { width: 10px; height: 10px; background: var(--gold); border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+    .pq-stem { flex: 1; width: 1px; background: rgba(201,168,76,.2); margin-top: 6px; }
+    .pq-item:last-child .pq-stem { display: none; }
+    .pq-text strong { display: block; color: var(--cream); margin-bottom: 6px; font-size: 1rem; }
+    .pq-text p { font-size: .9rem; line-height: 1.75; color: var(--muted); }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .stat-box {
+      background: var(--navy2); border: 1px solid var(--border); border-radius: 6px;
+      padding: 30px 22px; text-align: center;
+      transition: border-color .3s, transform .3s;
+    }
+    .stat-box:hover { border-color: rgba(201,168,76,.38); transform: translateY(-3px); }
+    .stat-box:nth-child(even) { margin-top: 24px; }
+    .stat-num   { font-size: 2.4rem; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
+    .stat-label { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); line-height: 1.5; }
+
+    /* ══════════ FAQ ══════════ */
+    #faq { background: var(--navy2); }
+    .faq-list { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+    .faq-item {
+      background: var(--navy); border: 1px solid var(--border); border-radius: 5px;
+      overflow: hidden; transition: border-color .3s;
+    }
+    .faq-item.open { border-color: rgba(201,168,76,.35); }
+    .faq-q {
+      width: 100%; padding: 22px 28px; display: flex; justify-content: space-between;
+      align-items: center; gap: 16px; cursor: pointer; background: none; border: none;
+      color: var(--cream); font-family: 'Georgia', serif; font-size: 1rem;
+      text-align: left; transition: color .2s;
+    }
+    .faq-q:hover { color: var(--gold); }
+    .faq-q svg { flex-shrink: 0; width: 18px; height: 18px; color: var(--gold); transition: transform .3s; }
+    .faq-item.open .faq-q svg { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s ease, padding .3s;
+      font-size: .93rem; line-height: 1.8; color: var(--muted);
+      padding: 0 28px;
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding: 0 28px 24px; }
+
+    /* ══════════ CONTACTO ══════════ */
+    #contacto { background: var(--navy); }
+    .contacto-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .contacto-left .tag  { display: block; }
+    .contacto-left .section-title { text-align: left; margin-bottom: 16px; }
+    .contacto-left p { font-size: 1rem; line-height: 1.8; color: var(--muted); margin-bottom: 36px; }
+    .contact-methods { display: flex; flex-direction: column; gap: 16px; }
+    .contact-item {
+      display: flex; align-items: center; gap: 18px;
+      background: var(--navy2); border: 1px solid var(--border); border-radius: 5px;
+      padding: 20px 24px; transition: border-color .3s;
+    }
+    .contact-item:hover { border-color: rgba(201,168,76,.35); }
+    .contact-icon {
+      width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; flex-shrink: 0;
+    }
+    .ci-green  { background: rgba(37,211,102,.12); border: 1px solid rgba(37,211,102,.3); }
+    .ci-blue   { background: rgba(59,130,246,.12);  border: 1px solid rgba(59,130,246,.3); }
+    .ci-gold   { background: rgba(201,168,76,.1);   border: 1px solid rgba(201,168,76,.3); }
+    .contact-info strong { display: block; color: var(--cream); font-size: .95rem; margin-bottom: 3px; }
+    .contact-info span   { font-size: .82rem; color: var(--muted); }
+    .contacto-cta {
+      background: var(--navy2); border: 1px solid var(--border); border-radius: 8px;
+      padding: 50px 40px; text-align: center; position: sticky; top: 100px;
+    }
+    .contacto-cta h3 { font-size: 1.6rem; color: var(--cream); margin-bottom: 14px; }
+    .contacto-cta p  { font-size: .93rem; line-height: 1.75; color: var(--muted); margin-bottom: 32px; }
+    .cta-btns { display: flex; flex-direction: column; gap: 14px; }
+    .btn-wa {
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      padding: 16px; background: #25D366; color: #fff; border-radius: 4px;
+      font-size: .95rem; font-family: 'Georgia', serif; font-weight: 700; letter-spacing: .05em;
+      transition: all .25s;
+    }
+    .btn-wa:hover { background: #20be5a; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(37,211,102,.3); }
+    .btn-tel {
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      padding: 14px; background: transparent; color: var(--cream);
+      border: 1px solid rgba(245,230,200,.25); border-radius: 4px;
+      font-size: .93rem; font-family: 'Georgia', serif;
+      transition: all .25s;
+    }
+    .btn-tel:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+    .cta-note { font-size: .78rem; color: rgba(245,230,200,.35); margin-top: 18px; letter-spacing: .05em; }
+
+    /* ══════════ FOOTER ══════════ */
+    footer {
+      background: #080c12;
+      border-top: 1px solid rgba(201,168,76,.1);
+    }
+    .footer-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; padding: 64px 44px 48px;
+      max-width: 1160px; margin: 0 auto;
+    }
+    footer img { height: 56px; width: auto; margin-bottom: 18px; opacity: .85; }
+    .footer-desc { font-size: .87rem; line-height: 1.8; color: rgba(245,230,200,.35); }
+    .footer-col h4 {
+      font-size: .78rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 18px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: .87rem; color: rgba(245,230,200,.45); transition: color .2s; }
+    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-bottom {
+      border-top: 1px solid rgba(201,168,76,.07);
+      padding: 22px 44px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: .78rem; color: rgba(245,230,200,.25);
+      max-width: 1160px; margin: 0 auto;
+    }
+
+    /* ══════════ Animaciones de entrada (CSS puro, sin CDN) ══════════ */
+    .reveal, .reveal-left, .reveal-right {
+      opacity: 0;
+      transition: opacity .75s ease, transform .75s ease;
+    }
+    .reveal       { transform: translateY(44px); }
+    .reveal-left  { transform: translateX(-44px); }
+    .reveal-right { transform: translateX(44px); }
+    .reveal.visible, .reveal-left.visible, .reveal-right.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ══════════ Responsive ══════════ */
+    @media (max-width: 900px) {
+      nav { padding: 12px 20px; }
+      .nav-links { display: none; }
+      .intro-grid, .porque-wrap, .contacto-wrap { grid-template-columns: 1fr; gap: 40px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .razas-grid { grid-template-columns: 1fr; }
+      .proceso-steps::before { display: none; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 72px 0; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+      .contacto-cta { padding: 34px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ NAVBAR ══════════ -->
+<nav id="navbar">
+  <img src="assets/logo_nobg.png" alt="Bulldog Vigos" />
+  <ul class="nav-links">
+    <li><a href="#razas">Razas</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#porque">Nosotros</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contacto" class="nav-cta">Contactar</a></li>
+  </ul>
+</nav>
+
+
+<!-- ══════════ VIDEO HERO (scroll scrub) ══════════ -->
+<div id="video-scene">
+  <div id="video-sticky">
+    <video id="hero-video" muted playsinline preload="auto">
+      <source src="assets/6314343-hd_1920_1080_24fps.mp4" type="video/mp4" />
+    </video>
+    <div class="video-overlay"></div>
+    <div class="video-content" id="video-content">
+      <img class="video-logo" src="assets/logo_nobg.png" alt="Bulldog Vigos" />
+      <p class="video-eyebrow">Ciudad de México · Criadero Certificado</p>
+      <h1 class="video-title">Bulldogs de <em>carácter</em>,<br/>criados con amor</h1>
+      <p class="video-sub">Especialistas en Bulldog Francés y Bulldog Inglés.<br/>Cachorros sanos, documentados y con acompañamiento real.</p>
+      <div class="btn-row">
+        <a class="btn btn-gold" href="https://wa.me/525521328306?text=Hola%2C%20me%20interesa%20informaci%C3%B3n%20sobre%20sus%20cachorros" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+        <a class="btn btn-ghost" href="#razas">Ver Razas ↓</a>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      Desplázate
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════ INTRO ══════════ -->
+<section id="intro">
+  <div class="container">
+    <div class="intro-grid">
+      <div class="intro-text reveal-left">
+        <span class="tag">Nuestra historia</span>
+        <h2 class="intro-title">Pasión por los <span class="gold">Bulldogs</span> desde el primer día</h2>
+        <div class="intro-body">
+          <p>
+            <strong style="color:var(--cream)">Bulldog Vigos</strong> nació de un amor genuino por estas razas únicas. No somos una tienda ni un criadero en masa — somos una familia en Ciudad de México que crió su primer Bulldog y no pudo parar.
+          </p>
+          <p>
+            Cada cachorro nace en casa, convive con personas desde el primer día y llega a su nuevo hogar socializado, sano y con todo en orden. Tú hablas directamente con el dueño, no con un vendedor.
+          </p>
+          <p>
+            Nos especializamos en dos razas con personalidades muy distintas pero igualmente encantadoras: el <strong style="color:var(--cream)">Bulldog Francés</strong>, compacto y juguetón, y el <strong style="color:var(--cream)">Bulldog Inglés</strong>, noble y sereno.
+          </p>
+        </div>
+      </div>
+      <div class="intro-visual reveal-right">
+        <div class="intro-placeholder">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          Foto del criadero aquí
+        </div>
+        <div class="intro-badge">
+          <div class="badge-dot"></div>
+          <div class="badge-text">
+            <strong>Respondemos rápido</strong>
+            Disponibles por WhatsApp
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ RAZAS ══════════ -->
+<section id="razas">
+  <div class="container">
+    <div class="section-header">
+      <span class="tag">Nuestras Razas</span>
+      <h2 class="section-title reveal">Francés <span class="gold">&amp;</span> Inglés</h2>
+      <p class="section-sub reveal">Dos razas únicas, con personalidades distintas y el mismo amor incondicional por sus familias.</p>
+    </div>
+    <div class="razas-grid">
+
+      <!-- Bulldog Francés -->
+      <div class="raza-card reveal-left">
+        <div class="raza-img">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          Pon aquí tu foto de Bulldog Francés
+        </div>
+        <div class="raza-body">
+          <span class="raza-badge">Bulldog Francés</span>
+          <h3 class="raza-name">El Frenchie</h3>
+          <p class="raza-desc">
+            Compacto, juguetón y con una personalidad arrolladora. Es el perro perfecto para la vida en ciudad — se adapta a departamentos, adora a los niños y no necesita grandes espacios para ser feliz. Su expresión curiosa y sus orejas de murciélago lo hacen inconfundible.
+          </p>
+          <div class="raza-traits">
+            <span class="trait">Sociable</span>
+            <span class="trait">Adaptable</span>
+            <span class="trait">Inteligente</span>
+            <span class="trait">Ideal para depa</span>
+            <span class="trait">Cariñoso con niños</span>
+            <span class="trait">Bajo mantenimiento</span>
+          </div>
+          <div class="raza-detail">
+            <div class="detail-item"><strong>Peso adulto</strong>8 – 14 kg</div>
+            <div class="detail-item"><strong>Altura</strong>27 – 35 cm</div>
+            <div class="detail-item"><strong>Esperanza de vida</strong>10 – 12 años</div>
+            <div class="detail-item"><strong>Ejercicio</strong>Moderado</div>
+          </div>
+          <p class="raza-price"><strong>Precio personalizado</strong> — escríbenos para más información</p>
+          <a class="btn btn-gold" href="https://wa.me/525521328306?text=Hola%2C%20me%20interesa%20un%20Bulldog%20Franc%C3%A9s.%20%C2%BFPueden%20darme%20informaci%C3%B3n%3F" target="_blank">
+            Preguntar por un Frenchie
+          </a>
+        </div>
+      </div>
+
+      <!-- Bulldog Inglés -->
+      <div class="raza-card reveal-right">
+        <div class="raza-img">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          Pon aquí tu foto de Bulldog Inglés
+        </div>
+        <div class="raza-body">
+          <span class="raza-badge">Bulldog Inglés</span>
+          <h3 class="raza-name">El Bulldog</h3>
+          <p class="raza-desc">
+            Noble, tranquilo y leal hasta el final. El Bulldog Inglés irradia carácter con su porte inconfundible y su cara arrugada. Son perros calmados que se llevan de maravilla con toda la familia, incluyendo niños y adultos mayores. Un compañero de vida para toda la familia.
+          </p>
+          <div class="raza-traits">
+            <span class="trait">Leal</span>
+            <span class="trait">Tranquilo</span>
+            <span class="trait">Robusto</span>
+            <span class="trait">Familiar</span>
+            <span class="trait">Gentil con niños</span>
+            <span class="trait">Icónico</span>
+          </div>
+          <div class="raza-detail">
+            <div class="detail-item"><strong>Peso adulto</strong>18 – 25 kg</div>
+            <div class="detail-item"><strong>Altura</strong>31 – 40 cm</div>
+            <div class="detail-item"><strong>Esperanza de vida</strong>8 – 10 años</div>
+            <div class="detail-item"><strong>Ejercicio</strong>Suave / Moderado</div>
+          </div>
+          <p class="raza-price"><strong>Precio personalizado</strong> — escríbenos para más información</p>
+          <a class="btn btn-gold" href="https://wa.me/525521328306?text=Hola%2C%20me%20interesa%20un%20Bulldog%20Ingl%C3%A9s.%20%C2%BFPueden%20darme%20informaci%C3%B3n%3F" target="_blank">
+            Preguntar por un Bulldog
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ PROCESO ══════════ -->
+<section id="proceso">
+  <div class="container">
+    <div class="section-header">
+      <span class="tag">Cómo funciona</span>
+      <h2 class="section-title reveal">Del <span class="gold">criadero</span> a tu hogar</h2>
+      <p class="section-sub reveal">Un proceso transparente, sin sorpresas y con acompañamiento en cada paso.</p>
+    </div>
+    <div class="proceso-steps">
+      <div class="step reveal">
+        <div class="step-num">💬</div>
+        <h3 class="step-title">Nos escribes</h3>
+        <p class="step-desc">Cuéntanos qué raza te interesa, dónde vives y qué esperas de tu nuevo compañero.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">🐾</div>
+        <h3 class="step-title">Te asesoramos</h3>
+        <p class="step-desc">Te enviamos fotos y videos de los cachorros disponibles. Resolvemos todas tus dudas.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">📋</div>
+        <h3 class="step-title">Reservas o compras</h3>
+        <p class="step-desc">Puedes apartar tu cachorro con anticipo o comprarlo directamente si está disponible.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">🏠</div>
+        <h3 class="step-title">Llega a casa</h3>
+        <p class="step-desc">Entrega en CDMX o coordinamos envío. El cachorro llega con cartilla, chip y todo en orden.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">❤️</div>
+        <h3 class="step-title">Seguimiento</h3>
+        <p class="step-desc">Te acompañamos las primeras semanas para que la adaptación sea tranquila para todos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ SERVICIOS ══════════ -->
+<section id="servicios">
+  <div class="container">
+    <div class="section-header">
+      <span class="tag">Lo que ofrecemos</span>
+      <h2 class="section-title reveal">Nuestros <span class="gold">Servicios</span></h2>
+      <p class="section-sub reveal">Todo lo que necesitas para encontrar, elegir y recibir al cachorro perfecto para ti.</p>
+    </div>
+    <div class="servicios-grid">
+
+      <div class="servicio-card reveal">
+        <div class="serv-icon">🐾</div>
+        <h3 class="serv-title">Venta de Cachorros</h3>
+        <p class="serv-desc">Cachorros saludables con todo listo para llegar a tu hogar.</p>
+        <ul class="serv-list">
+          <li>Vacunas al día según edad</li>
+          <li>Desparasitación completa</li>
+          <li>Chip de identificación</li>
+          <li>Cartilla de vacunación</li>
+          <li>Asesoría sobre cuidados básicos</li>
+        </ul>
+      </div>
+
+      <div class="servicio-card reveal">
+        <div class="serv-icon">📋</div>
+        <h3 class="serv-title">Reservaciones</h3>
+        <p class="serv-desc">¿Enamoraste de una camada que aún no está lista? Apártalo ahora.</p>
+        <ul class="serv-list">
+          <li>Aparta con anticipo desde camadas nuevas</li>
+          <li>Actualizaciones con fotos y videos semanales</li>
+          <li>Eliges sexo y coloración disponibles</li>
+          <li>Transparencia total durante todo el proceso</li>
+        </ul>
+      </div>
+
+      <div class="servicio-card reveal">
+        <div class="serv-icon">💬</div>
+        <h3 class="serv-title">Asesoramiento</h3>
+        <p class="serv-desc">Te orientamos antes, durante y después de la compra.</p>
+        <ul class="serv-list">
+          <li>¿Qué raza se adapta mejor a ti?</li>
+          <li>Preparación del hogar antes de que llegue</li>
+          <li>Alimentación recomendada por etapa</li>
+          <li>Veterinarios recomendados en CDMX</li>
+          <li>Soporte post-compra sin costo</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ POR QUÉ NOSOTROS ══════════ -->
+<section id="porque">
+  <div class="container">
+    <div class="porque-wrap">
+      <div class="porque-left">
+        <span class="tag">Por qué elegirnos</span>
+        <h2 class="section-title reveal-left">Crianza con <span class="gold">responsabilidad</span> real</h2>
+        <p class="porque-lead reveal-left">
+          No somos un negocio en masa. Somos personas que aman a sus perros y quieren que cada cachorro llegue a la familia correcta.
+        </p>
+        <ul class="porque-items">
+          <li class="pq-item reveal-left">
+            <div class="pq-line"><div class="pq-dot"></div><div class="pq-stem"></div></div>
+            <div class="pq-text">
+              <strong>Criados en casa, no en jaulas</strong>
+              <p>Cada cachorro crece en un ambiente familiar desde el primer día. Conviven con personas, aprenden a socializar y llegan a su nuevo hogar sin traumas ni miedos.</p>
+            </div>
+          </li>
+          <li class="pq-item reveal-left">
+            <div class="pq-line"><div class="pq-dot"></div><div class="pq-stem"></div></div>
+            <div class="pq-text">
+              <strong>Documentación completa sin cobros extra</strong>
+              <p>Cartilla de vacunas, desparasitaciones y chip incluidos en el precio. Sin sorpresas al final.</p>
+            </div>
+          </li>
+          <li class="pq-item reveal-left">
+            <div class="pq-line"><div class="pq-dot"></div><div class="pq-stem"></div></div>
+            <div class="pq-text">
+              <strong>Hablas directamente con el dueño</strong>
+              <p>No hay intermediarios. La persona que te atiende es la misma que crió y conoce a cada cachorro desde que nació.</p>
+            </div>
+          </li>
+          <li class="pq-item reveal-left">
+            <div class="pq-line"><div class="pq-dot"></div><div class="pq-stem"></div></div>
+            <div class="pq-text">
+              <strong>Seguimiento real después de la compra</strong>
+              <p>Te acompañamos en las primeras semanas, resolvemos dudas y estamos disponibles si algo te preocupa.</p>
+            </div>
+          </li>
+          <li class="pq-item reveal-left">
+            <div class="pq-line"><div class="pq-dot"></div><div class="pq-stem"></div></div>
+            <div class="pq-text">
+              <strong>Solo vendemos si es la combinación correcta</strong>
+              <p>Si creemos que un cachorro no es el ideal para tu situación, te lo decimos. Preferimos orientarte bien a cerrar una venta que no beneficia a nadie.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="stats-grid reveal-right">
+        <div class="stat-box">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Razas<br/>especializadas</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Atención<br/>personalizada</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">CDMX</div>
+          <div class="stat-label">Ciudad de México<br/>y envíos</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">✓</div>
+          <div class="stat-label">Vacunados<br/>y documentados</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ FAQ ══════════ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-header">
+      <span class="tag">Preguntas frecuentes</span>
+      <h2 class="section-title reveal">Dudas <span class="gold">comunes</span></h2>
+      <p class="section-sub reveal">Resolvemos lo que nos preguntan más seguido. Si no encuentras tu duda, escríbenos.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q">
+          ¿Con qué edad entregan a los cachorros?
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a">Los cachorros se entregan a partir de las 8 semanas de vida, nunca antes. A esa edad ya tienen su primera vacuna, están desparasitados y están listos para adaptarse a su nuevo hogar sin estrés.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">
+          ¿Cómo sé que el cachorro está sano?
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a">Cada cachorro sale con cartilla de vacunación firmada por un médico veterinario, registro de desparasitaciones y chip de identificación. Además, puedes hacer una visita previa o pedir videollamada para verlo antes de decidir.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">
+          ¿Hacen envíos fuera de CDMX?
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a">Sí, coordinamos envíos a otras ciudades de México con los cuidados necesarios para que el cachorro viaje seguro y cómodo. Escríbenos para cotizar según tu ciudad y elegir el método más seguro.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">
+          ¿Qué diferencia hay entre el Bulldog Francés y el Inglés?
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a">El Bulldog Francés es más pequeño (hasta 14 kg), muy activo, curioso y perfecto para departamentos. El Bulldog Inglés es más grande (hasta 25 kg), más tranquilo y solemne, ideal para quienes buscan un perro de compañía sereno. Ambos son excelentes con familias y niños.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">
+          ¿Puedo apartar un cachorro de una camada próxima?
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a">Sí. Cuando hay una camada esperada, puedes reservar tu lugar con un anticipo y elegir el cachorro cuando nazca y sea posible verlo. Te mantenemos al tanto con fotos y videos del desarrollo.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">
+          ¿Cómo es el proceso de pago?
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a">El precio se acuerda directamente con el dueño, dependiendo de la raza, coloración y características del cachorro. Aceptamos transferencia bancaria, efectivo y otras formas acordadas. Escríbenos y te damos todos los detalles.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ CONTACTO ══════════ -->
+<section id="contacto">
+  <div class="container">
+    <div class="contacto-wrap">
+      <div class="contacto-left">
+        <span class="tag">Contáctanos</span>
+        <h2 class="section-title reveal-left">¿Listo para tu <span class="gold">nuevo amigo</span>?</h2>
+        <p class="reveal-left">
+          Cuéntanos qué raza te interesa, el espacio donde vivirá y lo que buscas. Te respondemos rápido y con gusto te asesoramos sin ningún compromiso.
+        </p>
+        <div class="contact-methods">
+          <a class="contact-item reveal-left" href="https://wa.me/525521328306?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20cachorros" target="_blank">
+            <div class="contact-icon ci-green">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </div>
+            <div class="contact-info">
+              <strong>WhatsApp</strong>
+              <span>55 2132 8306 · Respuesta rápida</span>
+            </div>
+          </a>
+          <a class="contact-item reveal-left" href="tel:+525521328306">
+            <div class="contact-icon ci-blue">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.85 9.09a19.79 19.79 0 01-3.07-8.67A2 2 0 012.76 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.56a16 16 0 006.29 6.29l1.45-1.45a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div class="contact-info">
+              <strong>Teléfono</strong>
+              <span>55 2132 8306 · Ciudad de México</span>
+            </div>
+          </a>
+          <div class="contact-item reveal-left">
+            <div class="contact-icon ci-gold">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="contact-info">
+              <strong>Ubicación</strong>
+              <span>Ciudad de México · Envíos a toda la República</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contacto-cta reveal-right">
+        <h3>Escríbenos ahora</h3>
+        <p>Te respondemos con información de los cachorros disponibles, fotos actualizadas y precio personalizado según lo que busques.</p>
+        <div class="cta-btns">
+          <a class="btn-wa" href="https://wa.me/525521328306?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20cachorros%20Bulldog" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Escribir por WhatsApp
+          </a>
+          <a class="btn-tel" href="tel:+525521328306">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.85 9.09a19.79 19.79 0 01-3.07-8.67A2 2 0 012.76 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.56a16 16 0 006.29 6.29l1.45-1.45a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            Llamar: 55 2132 8306
+          </a>
+        </div>
+        <p class="cta-note">Ciudad de México · También coordinamos envíos</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <img src="assets/logo_nobg.png" alt="Bulldog Vigos" />
+      <p class="footer-desc">
+        Criadero especializado en Bulldog Francés y Bulldog Inglés en Ciudad de México. Cachorros criados en casa, con amor y responsabilidad.
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>Razas</h4>
+      <ul>
+        <li><a href="#razas">Bulldog Francés</a></li>
+        <li><a href="#razas">Bulldog Inglés</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="#servicios">Venta de cachorros</a></li>
+        <li><a href="#servicios">Reservaciones</a></li>
+        <li><a href="#servicios">Asesoramiento</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="https://wa.me/525521328306" target="_blank">WhatsApp</a></li>
+        <li><a href="tel:+525521328306">55 2132 8306</a></li>
+        <li><a href="#contacto">Más info</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Bulldog Vigos · Ciudad de México</span>
+    <span>Especialistas en Bulldog Francés &amp; Inglés</span>
+  </div>
+</footer>
+
+
+<!-- ══════════ SCRIPTS ══════════ -->
+<script>
+  /* ── Intersection Observer: reveal animations (sin CDN) ── */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+    revealObserver.observe(el);
+  });
+
+  /* ── Video scrub con scroll nativo ── */
+  const video  = document.getElementById('hero-video');
+  const scene  = document.getElementById('video-scene');
+  const content = document.getElementById('video-content');
+
+  function updateVideo() {
+    const rect     = scene.getBoundingClientRect();
+    const total    = scene.offsetHeight - window.innerHeight;
+    const scrolled = Math.max(0, -rect.top);
+    const progress = Math.min(1, scrolled / total);
+
+    if (video.duration) {
+      video.currentTime = video.duration * progress;
+    }
+
+    /* fade out texto del hero al scrollear */
+    const fadeProgress = Math.min(1, progress / 0.25);
+    content.style.opacity  = 1 - fadeProgress;
+    content.style.transform = `translateY(${-fadeProgress * 40}px)`;
+  }
+
+  video.addEventListener('loadedmetadata', () => { video.pause(); updateVideo(); });
+  if (video.readyState >= 1) { video.pause(); updateVideo(); }
+  window.addEventListener('scroll', updateVideo, { passive: true });
+
+  /* ── Navbar shrink con scroll nativo ── */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 70) {
+      navbar.style.padding = '10px 44px';
+    } else {
+      navbar.style.padding = '14px 44px';
+    }
+  }, { passive: true });
+
+  /* ── FAQ accordion ── */
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item   = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+</script>
+
+</body>
+</html>
