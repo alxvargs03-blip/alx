@@ -43,7 +43,7 @@ def main():
         procesos = p.get("procesos")
         if not procesos or "Láser" not in procesos or not set(procesos) <= PROCESOS:
             errores.append(f"{donde}: procesos inválidos {procesos}")
-        for campo in ("costo_mxn", "precio_mxn"):
+        for campo in ("precio_mxn",):
             r = p.get(campo)
             if not (isinstance(r, list) and len(r) == 2 and all(isinstance(n, int) and n > 0 for n in r) and r[0] <= r[1]):
                 errores.append(f"{donde}: '{campo}' debe ser [min, max] en pesos")

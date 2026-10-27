@@ -16,7 +16,7 @@ Cada día se agregan **30 productos nuevos** a `productos.json` y se republica l
    - `categoria`: una de `Cocina comercial`, `Asadores y fuego`, `Rancho y campo`, `Hogar y decoración`, `Negocio y señalética`, `Taller y herramientas`. Reparte el lote entre varias categorías.
    - `procesos`: siempre incluye `Láser`; agrega `Doblez`, `Soldadura`, `Rolado` o `Grabado` si los necesita.
    - `dificultad`: `Fácil`, `Media` o `Avanzada`.
-   - `costo_mxn` y `precio_mxn`: `[min, max]` en pesos enteros. Costo = material + corte.
+   - `precio_mxn`: precio de venta sugerido `[min, max]` en pesos enteros. **No** incluyas costo de fabricación ni margen.
    - `busqueda`: texto corto para buscar ideas en Pinterest.
    - Escribe en español de México, frases cortas y concretas.
 6. Restricciones de la máquina: láser de **fibra 1000 W**. Corta acero al carbón hasta ~8–10 mm, inoxidable hasta ~3–4 mm, aluminio hasta ~2–3 mm. No corta madera ni acrílico. El taller **también tiene dobladora y soldadora**, así que se valen productos que lleven doblez y soldadura (incluye algunos de ticket alto). El catálogo es para uso interno: ideas para fabricar y vender, no para mostrar a clientes. Prioriza productos para negocios y venta al público en México (cocina comercial, asadores, rancho, decoración, señalética, taller) con buen margen.

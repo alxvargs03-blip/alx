@@ -6,10 +6,15 @@
     "descripcion": "Prensa de palanca larga con placas gruesas que no se doblan. Las placas, el brazo y las orejas de la bisagra salen de una sola hoja.",
     "cliente": "Tortillerías chicas, fondas, taquerías y quien vende tortillas a mano",
     "material": "Inoxidable 304, 1/4\" en placas y 3/16\" en palanca",
-    "procesos": ["Láser", "Soldadura"],
+    "procesos": [
+      "Láser",
+      "Soldadura"
+    ],
     "dificultad": "Media",
-    "costo_mxn": [450, 650],
-    "precio_mxn": [1500, 2800],
+    "precio_mxn": [
+      1500,
+      2800
+    ],
     "tip": "Ofrécela en 20, 25 y 30 cm. El grabado del nombre del negocio en la placa superior la sube de precio.",
     "busqueda": "tortilladora de palanca acero inoxidable",
     "fecha": "2026-10-27"
@@ -21,10 +26,16 @@
     "descripcion": "Cortador de pared o de mesa con empujador y rejillas de 3/8\" y 1/2\". Las rejillas y el empujador son el corte láser más preciso del producto.",
     "cliente": "Puestos de papas, hamburgueserías, snacks y ferias",
     "material": "Inoxidable 304 calibre 12 para cuerpo, calibre 14 para rejillas",
-    "procesos": ["Láser", "Doblez", "Soldadura"],
+    "procesos": [
+      "Láser",
+      "Doblez",
+      "Soldadura"
+    ],
     "dificultad": "Media",
-    "costo_mxn": [500, 800],
-    "precio_mxn": [1800, 3500],
+    "precio_mxn": [
+      1800,
+      3500
+    ],
     "tip": "Vende las rejillas extra por separado (gajo, bastón delgado, cubo). Es venta recurrente.",
     "busqueda": "commercial french fry cutter lever",
     "fecha": "2026-10-27"
@@ -36,10 +47,16 @@
     "descripcion": "Base de lámina gruesa con parrilla de soporte para ollas grandes y cazos. Se entrega sin quemador o con quemador de alta presión comprado.",
     "cliente": "Carnitas, pozole, tamales, eventos y fiestas",
     "material": "Lámina negra 3/16\" y solera para la parrilla",
-    "procesos": ["Láser", "Doblez", "Soldadura"],
+    "procesos": [
+      "Láser",
+      "Doblez",
+      "Soldadura"
+    ],
     "dificultad": "Fácil",
-    "costo_mxn": [450, 700],
-    "precio_mxn": [1400, 2200],
+    "precio_mxn": [
+      1400,
+      2200
+    ],
     "tip": "Diseña las patas de encastre para que viaje desarmado y el envío salga barato.",
     "busqueda": "estufón un quemador lámina",
     "fecha": "2026-10-27"
@@ -51,10 +68,16 @@
     "descripcion": "Versión doble con charola recogegrasa y repisa lateral. Es el más pedido por puestos de comida en la calle.",
     "cliente": "Taquerías, antojitos, cocinas económicas",
     "material": "Lámina negra 3/16\" o inoxidable calibre 14",
-    "procesos": ["Láser", "Doblez", "Soldadura"],
+    "procesos": [
+      "Láser",
+      "Doblez",
+      "Soldadura"
+    ],
     "dificultad": "Media",
-    "costo_mxn": [900, 1300],
-    "precio_mxn": [2800, 4500],
+    "precio_mxn": [
+      2800,
+      4500
+    ],
     "tip": "Haz la versión inox con el logo del cliente calado en el frente; se cobra como pieza de imagen del negocio.",
     "busqueda": "estufón dos quemadores",
     "fecha": "2026-10-27"
@@ -66,10 +89,16 @@
     "descripcion": "Plancha de 1/4\" con zona de escurrido calada, barandal para que no caiga la carne y orificio de drenado.",
     "cliente": "Taqueros de suadero, campechanos y bistec",
     "material": "Acero al carbón 1/4\"",
-    "procesos": ["Láser", "Doblez", "Soldadura"],
+    "procesos": [
+      "Láser",
+      "Doblez",
+      "Soldadura"
+    ],
     "dificultad": "Media",
-    "costo_mxn": [500, 900],
-    "precio_mxn": [1500, 3000],
+    "precio_mxn": [
+      1500,
+      3000
+    ],
     "tip": "Hazla a medida del estufón que ya vendes y ofrécelos en paquete.",
     "busqueda": "plancha taquera escurridor",
     "fecha": "2026-10-27"
@@ -81,10 +110,14 @@
     "descripcion": "Tres patas que encajan en un aro sin soldadura. El cliente pone su disco de arado encima y lo arma en un minuto.",
     "cliente": "Gente de carne asada, campamentos, norte del país",
     "material": "Lámina negra 3/16\"",
-    "procesos": ["Láser"],
+    "procesos": [
+      "Láser"
+    ],
     "dificultad": "Fácil",
-    "costo_mxn": [200, 350],
-    "precio_mxn": [650, 1200],
+    "precio_mxn": [
+      650,
+      1200
+    ],
     "tip": "Sale 100% del láser. Calar el nombre de la familia en las patas lo vuelve regalo.",
     "busqueda": "disco de arado base patas desmontable",
     "fecha": "2026-10-27"
@@ -96,10 +129,15 @@
     "descripcion": "Asador que se arma con piezas que encajan entre sí y se guarda plano en una bolsa. Muy viral en Pinterest como 'flat pack grill'.",
     "cliente": "Campistas, pescadores, departamentos",
     "material": "Lámina negra calibre 14 o inoxidable calibre 16",
-    "procesos": ["Láser", "Doblez"],
+    "procesos": [
+      "Láser",
+      "Doblez"
+    ],
     "dificultad": "Fácil",
-    "costo_mxn": [400, 650],
-    "precio_mxn": [1500, 2800],
+    "precio_mxn": [
+      1500,
+      2800
+    ],
     "tip": "Vende la bolsa de lona incluida; percibe más valor que el asador solo.",
     "busqueda": "flat pack grill laser cut",
     "fecha": "2026-10-27"
@@ -111,10 +149,15 @@
     "descripcion": "Cuatro paneles con siluetas (venados, montañas, pinos, caballos) que se iluminan cuando hay fuego dentro.",
     "cliente": "Casas con jardín, terrazas, cabañas y restaurantes campestres",
     "material": "Lámina negra 1/8\" o acero corten",
-    "procesos": ["Láser", "Soldadura"],
+    "procesos": [
+      "Láser",
+      "Soldadura"
+    ],
     "dificultad": "Media",
-    "costo_mxn": [900, 1500],
-    "precio_mxn": [3500, 7000],
+    "precio_mxn": [
+      3500,
+      7000
+    ],
     "tip": "Ofrece el diseño personalizado (iniciales, escudo del rancho). Es lo que más se comparte en redes.",
     "busqueda": "laser cut fire pit cube silhouette",
     "fecha": "2026-10-27"
@@ -126,10 +169,14 @@
     "descripcion": "Paneles que se ensamblan con ranuras en cruz. Se envía en caja plana y se arma sin herramientas.",
     "cliente": "Venta en línea, Mercado Libre, regalos de temporada",
     "material": "Lámina negra 1/8\"",
-    "procesos": ["Láser"],
+    "procesos": [
+      "Láser"
+    ],
     "dificultad": "Fácil",
-    "costo_mxn": [600, 1000],
-    "precio_mxn": [2200, 4500],
+    "precio_mxn": [
+      2200,
+      4500
+    ],
     "tip": "Al no llevar soldadura puedes producir lotes grandes en una sola hoja.",
     "busqueda": "slot together fire pit laser",
     "fecha": "2026-10-27"
@@ -141,10 +188,16 @@
     "descripcion": "Bisagras, jaladera, patas, ventilas y soporte de parrilla listos para montar en un tambo de 200 L.",
     "cliente": "Herreros, gente que ya tiene tambo, ranchos",
     "material": "Lámina negra 3/16\" y 1/8\"",
-    "procesos": ["Láser", "Doblez", "Soldadura"],
+    "procesos": [
+      "Láser",
+      "Doblez",
+      "Soldadura"
+    ],
     "dificultad": "Media",
-    "costo_mxn": [700, 1200],
-    "precio_mxn": [2500, 4500],
+    "precio_mxn": [
+      2500,
+      4500
+    ],
     "tip": "Vende el kit solo y aparte el asador ya terminado. Llegas a dos tipos de cliente.",
     "busqueda": "barrel grill kit laser cut",
     "fecha": "2026-10-27"
@@ -156,10 +209,15 @@
     "descripcion": "Placa gruesa con mango calado. Pesa lo suficiente para aplastar la carne sin esfuerzo.",
     "cliente": "Hamburgueserías, food trucks, parrilleros caseros",
     "material": "Inoxidable 304 de 1/4\"",
-    "procesos": ["Láser", "Soldadura"],
+    "procesos": [
+      "Láser",
+      "Soldadura"
+    ],
     "dificultad": "Fácil",
-    "costo_mxn": [120, 200],
-    "precio_mxn": [450, 900],
+    "precio_mxn": [
+      450,
+      900
+    ],
     "tip": "El logo grabado en la placa la convierte en artículo promocional para el negocio.",
     "busqueda": "smash burger press stainless",
     "fecha": "2026-10-27"
@@ -171,10 +229,15 @@
     "descripcion": "Dos espátulas de hoja ancha con filo recto, una con ranuras para escurrir. Mango de madera remachado.",
     "cliente": "Taqueros, hamburgueseros, parrilleros",
     "material": "Inoxidable 304 calibre 14",
-    "procesos": ["Láser", "Doblez"],
+    "procesos": [
+      "Láser",
+      "Doblez"
+    ],
     "dificultad": "Fácil",
-    "costo_mxn": [80, 150],
-    "precio_mxn": [350, 700],
+    "precio_mxn": [
+      350,
+      700
+    ],
     "tip": "Producto pequeño que caben decenas en una hoja; ideal para acomodar en los huecos de otros cortes.",
     "busqueda": "griddle spatula set laser cut",
     "fecha": "2026-10-27"
@@ -186,10 +249,15 @@
     "descripcion": "Rack para 4 a 6 molcajetes o salseras, con espacio para servilletas y limones.",
     "cliente": "Taquerías, cenadurías, puestos de antojitos",
     "material": "Inoxidable 304 calibre 18",
-    "procesos": ["Láser", "Doblez"],
+    "procesos": [
+      "Láser",
+      "Doblez"
+    ],
     "dificultad": "Fácil",
-    "costo_mxn": [150, 250],
-    "precio_mxn": [600, 1200],
+    "precio_mxn": [
+      600,
+      1200
+    ],
     "tip": "Calar el nombre de la taquería en el frente; el dueño lo ve como publicidad.",
     "busqueda": "porta salsas acero inoxidable taqueria",
     "fecha": "2026-10-27"
@@ -201,10 +269,16 @@
     "descripcion": "Base giratoria con charola recogegrasa y espada desmontable. Se puede combinar con quemador vertical.",
     "cliente": "Taquerías de pastor y eventos",
     "material": "Inoxidable 304 calibre 12 y varilla",
-    "procesos": ["Láser", "Doblez", "Soldadura"],
+    "procesos": [
+      "Láser",
+      "Doblez",
+      "Soldadura"
+    ],
     "dificultad": "Avanzada",
-    "costo_mxn": [500, 900],
-    "precio_mxn": [1800, 3500],
+    "precio_mxn": [
+      1800,
+      3500
+    ],
     "tip": "Empieza con el trompo chico de 20 a 30 kg; es el que más compran las taquerías nuevas.",
     "busqueda": "trompo al pastor base acero",
     "fecha": "2026-10-27"
@@ -216,10 +290,15 @@
     "descripcion": "La marca del rancho cortada en placa gruesa y soldada a un mango. Cada pieza es diseño único.",
     "cliente": "Ganaderos y ranchos",
     "material": "Acero al carbón 1/2\" para la marca, redondo para el mango",
-    "procesos": ["Láser", "Soldadura"],
+    "procesos": [
+      "Láser",
+      "Soldadura"
+    ],
     "dificultad": "Fácil",
-    "costo_mxn": [150, 300],
-    "precio_mxn": [800, 1800],
+    "precio_mxn": [
+      800,
+      1800
+    ],
     "tip": "Ofrece también la versión decorativa de pared con la misma marca.",
     "busqueda": "fierro de herrar ganado personalizado",
     "fecha": "2026-10-27"
@@ -231,10 +310,15 @@
     "descripcion": "Arco o placa grande con el nombre del rancho y siluetas (caballos, toros, nopales, montañas).",
     "cliente": "Ranchos, quintas, haciendas de eventos",
     "material": "Lámina negra 1/8\" a 3/16\" o acero corten",
-    "procesos": ["Láser", "Soldadura"],
+    "procesos": [
+      "Láser",
+      "Soldadura"
+    ],
     "dificultad": "Media",
-    "costo_mxn": [900, 1500],
-    "precio_mxn": [3500, 9000],
+    "precio_mxn": [
+      3500,
+      9000
+    ],
     "tip": "Cobra el diseño aparte. Los clientes pagan más por ver un boceto con su nombre antes de cortar.",
     "busqueda": "letrero metal entrada rancho",
     "fecha": "2026-10-27"
@@ -246,10 +330,14 @@
     "descripcion": "Número grande con separadores para que haga sombra en la pared. Estilo moderno, minimalista o rústico.",
     "cliente": "Fraccionamientos nuevos, casas, despachos",
     "material": "Lámina calibre 14 o 1/8\" con pintura electrostática",
-    "procesos": ["Láser"],
+    "procesos": [
+      "Láser"
+    ],
     "dificultad": "Fácil",
-    "costo_mxn": [80, 150],
-    "precio_mxn": [450, 1200],
+    "precio_mxn": [
+      450,
+      1200
+    ],
     "tip": "Producto de alta rotación en línea; ten 3 o 4 tipografías listas para cotizar al momento.",
     "busqueda": "modern house number metal sign",
     "fecha": "2026-10-27"
@@ -261,10 +349,15 @@
     "descripcion": "Letras o logo calado con separadores de pared y tira LED detrás. De noche se ve el halo de luz.",
     "cliente": "Barberías, taquerías, cafés, gimnasios, consultorios",
     "material": "Lámina calibre 14 o inoxidable calibre 16",
-    "procesos": ["Láser", "Doblez"],
+    "procesos": [
+      "Láser",
+      "Doblez"
+    ],
     "dificultad": "Media",
-    "costo_mxn": [500, 900],
-    "precio_mxn": [2500, 6000],
+    "precio_mxn": [
+      2500,
+      6000
+    ],
     "tip": "Muestra una foto de noche en tus anuncios; es lo que vende este producto.",
     "busqueda": "backlit metal business sign",
     "fecha": "2026-10-27"
@@ -276,10 +369,15 @@
     "descripcion": "Pegboard metálico perforado con ganchos y repisas de encastre que se acomodan donde quiera el cliente.",
     "cliente": "Talleres mecánicos, cocheras, carpinteros",
     "material": "Lámina negra calibre 16",
-    "procesos": ["Láser", "Doblez"],
+    "procesos": [
+      "Láser",
+      "Doblez"
+    ],
     "dificultad": "Fácil",
-    "costo_mxn": [250, 400],
-    "precio_mxn": [900, 1800],
+    "precio_mxn": [
+      900,
+      1800
+    ],
     "tip": "Vende ganchos y accesorios sueltos para que el cliente regrese.",
     "busqueda": "metal pegboard laser cut tool wall",
     "fecha": "2026-10-27"
@@ -291,10 +389,15 @@
     "descripcion": "Par de soportes con diseño calado (geométrico, ramas, herradura) para repisas de madera.",
     "cliente": "Decoración de casas, cafés, tiendas de muebles",
     "material": "Lámina negra 3/16\"",
-    "procesos": ["Láser", "Doblez"],
+    "procesos": [
+      "Láser",
+      "Doblez"
+    ],
     "dificultad": "Fácil",
-    "costo_mxn": [100, 200],
-    "precio_mxn": [450, 900],
+    "precio_mxn": [
+      450,
+      900
+    ],
     "tip": "Asóciate con un carpintero para vender la repisa completa con tabla.",
     "busqueda": "decorative shelf bracket laser cut",
     "fecha": "2026-10-27"
@@ -306,10 +409,14 @@
     "descripcion": "Mapa calado con divisiones por estado o municipio. Se puede marcar la ciudad del cliente con un corazón.",
     "cliente": "Regalos, oficinas, salas, negocios turísticos",
     "material": "Lámina calibre 16 o 14 con pintura",
-    "procesos": ["Láser"],
+    "procesos": [
+      "Láser"
+    ],
     "dificultad": "Fácil",
-    "costo_mxn": [150, 300],
-    "precio_mxn": [900, 2500],
+    "precio_mxn": [
+      900,
+      2500
+    ],
     "tip": "En Pinterest funcionan muy bien en color negro mate sobre pared blanca o en dorado.",
     "busqueda": "metal wall map laser cut",
     "fecha": "2026-10-27"
@@ -321,10 +428,16 @@
     "descripcion": "Base inclinable para garrafón de 20 L con diseño calado en los costados.",
     "cliente": "Cocinas, oficinas, negocios de comida",
     "material": "Lámina negra calibre 12",
-    "procesos": ["Láser", "Doblez", "Soldadura"],
+    "procesos": [
+      "Láser",
+      "Doblez",
+      "Soldadura"
+    ],
     "dificultad": "Fácil",
-    "costo_mxn": [200, 350],
-    "precio_mxn": [700, 1400],
+    "precio_mxn": [
+      700,
+      1400
+    ],
     "tip": "Hazlo de encastre para que pueda enviarse por paquetería sin abultar.",
     "busqueda": "soporte garrafon metal",
     "fecha": "2026-10-27"
@@ -336,10 +449,15 @@
     "descripcion": "Riel de pared con ganchos deslizables para colgar cortes, chorizo o cecina.",
     "cliente": "Carnicerías, cecinerías, taquerías",
     "material": "Inoxidable 304 calibre 10",
-    "procesos": ["Láser", "Doblez"],
+    "procesos": [
+      "Láser",
+      "Doblez"
+    ],
     "dificultad": "Fácil",
-    "costo_mxn": [150, 300],
-    "precio_mxn": [600, 1200],
+    "precio_mxn": [
+      600,
+      1200
+    ],
     "tip": "Los ganchos sueltos se cortan en masa y se venden por docena.",
     "busqueda": "butcher hook rail stainless",
     "fecha": "2026-10-27"
@@ -351,10 +469,14 @@
     "descripcion": "Perfiles de cuchillo (chef, deshuesador, bowie, parrillero) listos para templar, afilar y poner cachas.",
     "cliente": "Cuchilleros artesanales, aficionados, escuelas de forja",
     "material": "Acero 1095 o 440C de 3 a 4 mm",
-    "procesos": ["Láser"],
+    "procesos": [
+      "Láser"
+    ],
     "dificultad": "Fácil",
-    "costo_mxn": [40, 90],
-    "precio_mxn": [250, 600],
+    "precio_mxn": [
+      250,
+      600
+    ],
     "tip": "El margen está en el volumen: vende paquetes de 5 o 10 blanks.",
     "busqueda": "knife blank laser cut",
     "fecha": "2026-10-27"
@@ -366,10 +488,15 @@
     "descripcion": "Herrajes tipo colonial o rústico (flechas, hojas, flor de lis) para portones de madera.",
     "cliente": "Carpinteros, herreros, casas de campo",
     "material": "Lámina negra 3/16\" a 1/4\"",
-    "procesos": ["Láser", "Doblez"],
+    "procesos": [
+      "Láser",
+      "Doblez"
+    ],
     "dificultad": "Fácil",
-    "costo_mxn": [60, 120],
-    "precio_mxn": [300, 700],
+    "precio_mxn": [
+      300,
+      700
+    ],
     "tip": "Vende a herreros por mayoreo; ellos ya tienen la clientela de portones.",
     "busqueda": "decorative strap hinge gate",
     "fecha": "2026-10-27"
@@ -381,10 +508,14 @@
     "descripcion": "Paneles calados con patrones geométricos, vegetales o de privacidad para portones, bardas y fachadas.",
     "cliente": "Constructoras, arquitectos, herreros, casas nuevas",
     "material": "Lámina negra 1/8\" o acero corten",
-    "procesos": ["Láser"],
+    "procesos": [
+      "Láser"
+    ],
     "dificultad": "Media",
-    "costo_mxn": [1500, 3000],
-    "precio_mxn": [3500, 7000],
+    "precio_mxn": [
+      3500,
+      7000
+    ],
     "tip": "Cotiza por metro cuadrado. Es de los productos que más ingreso dejan por hora de máquina.",
     "busqueda": "laser cut privacy screen gate panel",
     "fecha": "2026-10-27"
@@ -396,10 +527,16 @@
     "descripcion": "Gabinete ventilado con puerta y candado para cilindros de 20 a 45 kg. Con diseño calado para que se vea bien en la fachada.",
     "cliente": "Casas, departamentos, negocios de comida",
     "material": "Lámina negra calibre 14",
-    "procesos": ["Láser", "Doblez", "Soldadura"],
+    "procesos": [
+      "Láser",
+      "Doblez",
+      "Soldadura"
+    ],
     "dificultad": "Media",
-    "costo_mxn": [600, 1000],
-    "precio_mxn": [1800, 3500],
+    "precio_mxn": [
+      1800,
+      3500
+    ],
     "tip": "Muy buscado por robos de tanques; menciona la seguridad en tu anuncio.",
     "busqueda": "jaula para tanque de gas",
     "fecha": "2026-10-27"
@@ -411,10 +548,16 @@
     "descripcion": "Caja con puerta, ventilas reguladoras, rieles para 3 o 4 parrillas y caja de fuego abajo.",
     "cliente": "Parrilleros, restaurantes de BBQ, aficionados al ahumado",
     "material": "Lámina negra 3/16\"",
-    "procesos": ["Láser", "Doblez", "Soldadura"],
+    "procesos": [
+      "Láser",
+      "Doblez",
+      "Soldadura"
+    ],
     "dificultad": "Avanzada",
-    "costo_mxn": [1200, 2000],
-    "precio_mxn": [4500, 9000],
+    "precio_mxn": [
+      4500,
+      9000
+    ],
     "tip": "Pieza de ticket alto; ten uno armado para que el cliente lo vea en persona.",
     "busqueda": "vertical smoker box laser cut",
     "fecha": "2026-10-27"
@@ -426,10 +569,14 @@
     "descripcion": "Placas con barrenos, cartabones y conectores para estructuras metálicas, cortados a plano del cliente.",
     "cliente": "Herreros, constructoras, talleres de estructura",
     "material": "Acero al carbón 1/4\" a 1/2\"",
-    "procesos": ["Láser"],
+    "procesos": [
+      "Láser"
+    ],
     "dificultad": "Fácil",
-    "costo_mxn": [30, 80],
-    "precio_mxn": [120, 300],
+    "precio_mxn": [
+      120,
+      300
+    ],
     "tip": "Precio por pieza bajo, pero llegan pedidos de cientos. Da flujo de efectivo constante.",
     "busqueda": "base plate gusset laser cut",
     "fecha": "2026-10-27"
@@ -441,10 +588,15 @@
     "descripcion": "Placa con ganchos doblados y figura de caballo, toro, gallo, montaña o el apellido de la familia.",
     "cliente": "Regalos, casas, tiendas de decoración",
     "material": "Lámina negra calibre 14",
-    "procesos": ["Láser", "Doblez"],
+    "procesos": [
+      "Láser",
+      "Doblez"
+    ],
     "dificultad": "Fácil",
-    "costo_mxn": [60, 120],
-    "precio_mxn": [350, 750],
+    "precio_mxn": [
+      350,
+      750
+    ],
     "tip": "Producto de regalo de temporada (Día del Padre, Navidad, bodas).",
     "busqueda": "metal key holder wall laser cut",
     "fecha": "2026-10-27"

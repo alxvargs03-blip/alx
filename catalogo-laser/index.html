@@ -158,16 +158,11 @@ input[type="search"] { flex: 1 1 240px; }
   border-top: 1px dashed var(--line);
   padding-top: 12px;
   display: grid;
-  grid-template-columns: 1fr 1fr auto;
-  gap: 8px;
-  align-items: end;
   font-variant-numeric: tabular-nums;
 }
 .money div small { display: block; font: 500 11px/1.4 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
 .money div b { font: 600 16px/1.2 var(--font-body); }
 .money .precio b { color: var(--accent); }
-.margen { font: 700 20px/1 var(--font-display); color: var(--good); background: var(--good-soft); border-radius: 6px; padding: 8px 10px; text-align: center; }
-.margen small { display: block; font: 500 10px/1.2 var(--font-mono); letter-spacing: .06em; }
 .links { display: flex; flex-wrap: wrap; gap: 8px; }
 .links a {
   font: 600 14px/1 var(--font-body);
@@ -188,7 +183,7 @@ input[type="search"] { flex: 1 1 240px; }
   <header>
     <div class="eyebrow">Fibra 1000 W · lámina e inoxidable · precios en MXN</div>
     <h1>Catálogo <span>Láser CNC</span></h1>
-    <p class="lead">Productos de metal que se venden bien y se pueden fabricar con una cortadora láser de fibra de 1000 W. Cada día se agrega un lote nuevo de 30 ideas con material, procesos, costo estimado y precio de venta sugerido.</p>
+    <p class="lead">Productos de metal que se venden bien y se pueden fabricar con una cortadora láser de fibra de 1000 W. Cada día se agrega un lote nuevo de 30 ideas con material, procesos y precio de venta sugerido.</p>
     <div class="stats" id="stats">
       <div class="stat"><b id="st-total">—</b><small>Productos</small></div>
       <div class="stat"><b id="st-lotes">—</b><small>Lotes diarios</small></div>
@@ -206,7 +201,6 @@ input[type="search"] { flex: 1 1 240px; }
       </select>
       <select id="orden" aria-label="Ordenar">
         <option value="nuevo">Más nuevos primero</option>
-        <option value="margen">Mayor margen</option>
         <option value="precio">Precio más alto</option>
       </select>
       <label class="check"><input type="checkbox" id="solo"> Solo láser, sin soldar</label>
@@ -219,7 +213,7 @@ input[type="search"] { flex: 1 1 240px; }
 
   <main id="lista"><p class="empty">Cargando productos…</p></main>
 
-  <p class="note">Los costos y precios son estimados de referencia para México (material + corte, sin mano de obra de acabado ni envío). Antes de fijar tu precio revisa los enlaces de Mercado Libre de cada producto. Los enlaces de Pinterest abren búsquedas de ideas para diseño.</p>
+  <p class="note">Los precios de venta son referencias aproximadas para México. Antes de fijar tu precio revisa los enlaces de Mercado Libre de cada producto. Los enlaces de Pinterest abren búsquedas de ideas para diseño.</p>
 </div>
 
 <script>
@@ -234,7 +228,6 @@ const ICONOS = {
 const CATEGORIAS = Object.keys(ICONOS);
 const pesos = n => "$" + n.toLocaleString("es-MX");
 const rango = ([a, b]) => a === b ? pesos(a) : `${pesos(a)}–${pesos(b)}`;
-const margen = p => (p.precio_mxn[0] + p.precio_mxn[1]) / (p.costo_mxn[0] + p.costo_mxn[1]);
 const soloLaser = p => !p.procesos.includes("Soldadura");
 const fechaLarga = f => new Date(f + "T12:00:00").toLocaleDateString("es-MX", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -260,9 +253,7 @@ function ficha(p) {
       <p class="tip">${esc(p.tip)}</p>
     </div>
     <div class="money">
-      <div><small>Costo est.</small><b>${rango(p.costo_mxn)}</b></div>
-      <div class="precio"><small>Venta sugerida</small><b>${rango(p.precio_mxn)}</b></div>
-      <div class="margen">${margen(p).toFixed(1)}×<small>MARGEN</small></div>
+      <div class="precio"><small>Se vende en</small><b>${rango(p.precio_mxn)}</b></div>
     </div>
     <div class="links">
       <a href="${pin}" target="_blank" rel="noopener">Ideas en Pinterest</a>
@@ -288,8 +279,7 @@ function pintar() {
   if (!vis.length) { lista.innerHTML = '<p class="empty">Ningún producto coincide con esos filtros. Prueba con otra categoría o borra la búsqueda.</p>'; return; }
 
   if (estado.orden !== "nuevo") {
-    const k = estado.orden === "margen" ? margen : p => p.precio_mxn[1];
-    vis.sort((a, b) => k(b) - k(a));
+    vis.sort((a, b) => b.precio_mxn[1] - a.precio_mxn[1]);
     lista.innerHTML = `<section class="lote"><div class="grid">${vis.map(ficha).join("")}</div></section>`;
     return;
   }
