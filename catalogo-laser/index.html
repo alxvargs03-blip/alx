@@ -1,265 +1,365 @@
 <title>Catálogo Láser CNC</title>
 <meta name="claude:viewport-fit-sides" content="cover">
+<meta name="theme-color" content="#0f1720">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
 <style>
-/* Layout: hoja de taller — encabezado tipo plano de corte, filtros fijos, rejilla de fichas agrupadas por lote diario */
+/* Layout: app de catálogo pensada para celular — barra superior de acero, buscador fijo, lista compacta, detalle en hoja inferior; en escritorio pasa a rejilla */
 :root {
-  --bg: #e9edf0;
+  --bg: #eef1f4;
   --surface: #ffffff;
-  --ink: #18212b;
-  --muted: #5a6672;
-  --line: #c9d1d8;
-  --accent: #2443b8;
-  --accent-soft: #e3e8fa;
-  --spark: #c24a12;
-  --good: #1d7a4a;
-  --good-soft: #e1f2e8;
+  --ink: #141c25;
+  --muted: #5d6874;
+  --line: #d6dce2;
+  --steel: #0f1720;
+  --steel-ink: #f2f5f8;
+  --steel-muted: #93a1b0;
+  --accent: #2346c2;
+  --spark: #e0601f;
+  --good: #1b7a49;
+  --c-cocina: #2346c2;
+  --c-fuego: #c9501a;
+  --c-rancho: #8a5a14;
+  --c-hogar: #0f7d74;
+  --c-negocio: #7b3fb8;
+  --c-taller: #4a5866;
   --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
   --font-body: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
-  --grid: rgba(36, 67, 184, .07);
+  --radius: 14px;
+  --shadow: 0 1px 2px rgba(15, 23, 32, .06), 0 4px 14px rgba(15, 23, 32, .06);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #11161c; --surface: #19212a; --ink: #e6ebf0; --muted: #98a4b0; --line: #2c3743;
-    --accent: #8ea6ff; --accent-soft: #232d4a; --spark: #ff8a4c; --good: #6fd39c; --good-soft: #17301f;
-    --grid: rgba(142, 166, 255, .06); color-scheme: dark;
+    --bg: #0b1016; --surface: #151d26; --ink: #e8edf2; --muted: #9aa7b4; --line: #26313d;
+    --steel: #070b10; --steel-ink: #f2f5f8; --steel-muted: #8796a6;
+    --accent: #8ea6ff; --spark: #ff8a4c; --good: #6fd39c;
+    --c-cocina: #8ea6ff; --c-fuego: #ff8a4c; --c-rancho: #e0b060; --c-hogar: #4fd1c5; --c-negocio: #c49cf2; --c-taller: #a9b7c6;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4); color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #11161c; --surface: #19212a; --ink: #e6ebf0; --muted: #98a4b0; --line: #2c3743;
-  --accent: #8ea6ff; --accent-soft: #232d4a; --spark: #ff8a4c; --good: #6fd39c; --good-soft: #17301f;
-  --grid: rgba(142, 166, 255, .06); color-scheme: dark;
+  --bg: #0b1016; --surface: #151d26; --ink: #e8edf2; --muted: #9aa7b4; --line: #26313d;
+  --steel: #070b10; --steel-ink: #f2f5f8; --steel-muted: #8796a6;
+  --accent: #8ea6ff; --spark: #ff8a4c; --good: #6fd39c;
+  --c-cocina: #8ea6ff; --c-fuego: #ff8a4c; --c-rancho: #e0b060; --c-hogar: #4fd1c5; --c-negocio: #c49cf2; --c-taller: #a9b7c6;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .4); color-scheme: dark;
 }
 
-* { box-sizing: border-box; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 body {
   background: var(--bg);
   color: var(--ink);
   font: 400 16px/1.5 var(--font-body);
+  margin: 0;
+  padding-block: 0 40px;
+}
+.gutter {
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 0 48px;
 }
-.wrap { max-width: 1180px; margin: 0 auto; }
+.inner { max-width: 1180px; margin: 0 auto; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--steel); }
 
-/* Encabezado */
-header {
-  padding-block: 40px 28px;
-  background-image:
-    linear-gradient(var(--grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size: 24px 24px;
-  border-bottom: 2px solid var(--ink);
-  display: grid;
-  gap: 20px;
+/* Encabezado de acero */
+.hero {
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgba(224, 96, 31, .22), transparent 55%),
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px) 0 0 / 22px 22px,
+    linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px) 0 0 / 22px 22px,
+    var(--steel);
+  color: var(--steel-ink);
+  padding-block: 22px 26px;
 }
-.eyebrow {
-  font: 500 12px/1 var(--font-mono);
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-h1 {
-  font: 700 clamp(40px, 7vw, 72px)/.95 var(--font-display);
-  text-transform: uppercase;
-  letter-spacing: -.01em;
-  margin: 0;
-  text-wrap: balance;
-}
-h1 span { color: var(--accent); }
-.lead { max-width: 62ch; margin: 0; color: var(--muted); font-size: 17px; }
-.stats { display: flex; flex-wrap: wrap; gap: 12px 32px; }
-.stat b { display: block; font: 700 32px/1 var(--font-display); font-variant-numeric: tabular-nums; }
-.stat small { font: 500 12px/1.4 var(--font-mono); color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.hero .inner { display: grid; gap: 14px; }
+.brand { display: flex; align-items: center; gap: 10px; font: 600 12px/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--steel-muted); }
+.brand i { width: 10px; height: 10px; border-radius: 50%; background: var(--spark); box-shadow: 0 0 0 4px rgba(224, 96, 31, .25), 0 0 14px 2px rgba(224, 96, 31, .7); }
+h1 { margin: 0; font: 700 clamp(38px, 9vw, 68px)/.92 var(--font-display); text-transform: uppercase; letter-spacing: -.005em; text-wrap: balance; }
+h1 em { font-style: normal; color: var(--spark); }
+.lead { margin: 0; max-width: 56ch; color: var(--steel-muted); font-size: 16px; }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; max-width: 520px; }
+.stat { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 10px 12px; }
+.stat b { display: block; font: 700 26px/1 var(--font-display); font-variant-numeric: tabular-nums; }
+.stat small { display: block; margin-top: 4px; font-size: 12px; line-height: 1.2; color: var(--steel-muted); }
 
-/* Filtros */
-.toolbar {
+/* Barra fija: buscador + categorías */
+.bar {
   position: sticky;
   top: env(safe-area-inset-top, 0px);
   z-index: 5;
-  background: var(--bg);
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: saturate(1.4) blur(10px);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
   border-bottom: 1px solid var(--line);
-  padding-block: 14px;
-  display: grid;
-  gap: 12px;
+  padding-block: 12px 10px;
 }
-body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
-.row { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
-.row > * { min-width: 0; }
-input[type="search"], select {
-  font: inherit;
-  font-size: 15px;
-  color: var(--ink);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 8px 12px;
+.bar .inner { display: grid; gap: 10px; }
+.search-row { display: flex; gap: 8px; }
+.search {
+  flex: 1; min-width: 0; position: relative;
 }
-input[type="search"] { flex: 1 1 240px; }
-.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.search svg { position: absolute; left: 12px; top: 50%; width: 18px; height: 18px; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+.search input {
+  width: 100%; height: 44px; border-radius: 12px; border: 1px solid var(--line);
+  background: var(--surface); color: var(--ink); font: 500 16px var(--font-body);
+  padding: 0 12px 0 38px;
+}
+.btn-filtros {
+  height: 44px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface);
+  padding: 0 14px; display: inline-flex; align-items: center; gap: 6px; font-weight: 600; cursor: pointer;
+}
+.btn-filtros svg { width: 18px; height: 18px; }
+.btn-filtros .n[hidden] { display: none; }
+.btn-filtros .n { min-width: 20px; height: 20px; border-radius: 10px; background: var(--accent); color: var(--surface); font-size: 12px; display: grid; place-items: center; padding: 0 6px; }
+.chips {
+  display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
+  margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))) calc(-1 * max(16px, env(safe-area-inset-right, 0px)));
+  padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px));
+  scroll-padding-inline: 16px;
+}
+.chips::-webkit-scrollbar { display: none; }
 .chip {
-  font: 500 14px/1 var(--font-body);
-  border: 1px solid var(--line);
-  background: var(--surface);
-  color: var(--ink);
-  border-radius: 999px;
-  padding: 7px 12px;
-  cursor: pointer;
+  flex: none; height: 36px; padding: 0 14px; border-radius: 18px; border: 1px solid var(--line);
+  background: var(--surface); font-weight: 600; font-size: 14px; cursor: pointer; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 6px;
 }
-.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.check { display: inline-flex; gap: 6px; align-items: center; font-size: 15px; cursor: pointer; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.count { font: 500 13px/1 var(--font-mono); color: var(--muted); margin-left: auto; }
+.chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+.chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
 
-/* Lotes y fichas */
-.lote { display: grid; gap: 16px; padding-top: 32px; }
-.lote h2 {
-  margin: 0;
-  font: 700 26px/1.1 var(--font-display);
-  text-transform: uppercase;
-  display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline;
-}
-.lote h2 small { font: 500 13px/1 var(--font-mono); color: var(--muted); text-transform: none; }
-.new { font: 600 11px/1 var(--font-mono); color: var(--spark); border: 1px solid currentColor; border-radius: 4px; padding: 4px 6px; letter-spacing: .06em; }
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: 16px; }
+/* Lista */
+main { padding-block: 8px 0; }
+.lote { display: grid; gap: 12px; padding-top: 20px; }
+.lote-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.lote h2 { margin: 0; font: 700 22px/1.1 var(--font-display); text-transform: uppercase; letter-spacing: .01em; }
+.lote-head small { color: var(--muted); font-size: 14px; }
+.badge-new { font: 600 11px/1 var(--font-mono); letter-spacing: .08em; color: #fff; background: var(--spark); border-radius: 6px; padding: 5px 7px; }
+.grid { display: grid; gap: 10px; }
+.resumen { color: var(--muted); font-size: 14px; padding-top: 14px; }
 
-.card {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 18px;
-  display: grid;
-  grid-template-rows: auto auto 1fr auto auto;
-  gap: 12px;
-  min-width: 0;
+.item {
+  --c: var(--c-taller);
+  display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 14px; align-items: center;
+  width: 100%; text-align: left; cursor: pointer;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 10px 12px 10px 10px; box-shadow: var(--shadow);
 }
-.card-top { display: flex; gap: 12px; align-items: center; }
-.ico {
-  flex: none; width: 44px; height: 44px; border-radius: 6px;
-  background: var(--accent-soft); color: var(--accent);
-  display: grid; place-items: center;
+.thumb {
+  aspect-ratio: 1; max-width: 100%; border-radius: 10px; display: grid; place-items: center; color: var(--c);
+  background:
+    linear-gradient(color-mix(in srgb, var(--c) 14%, transparent) 1px, transparent 1px) 0 0 / 12px 12px,
+    linear-gradient(90deg, color-mix(in srgb, var(--c) 14%, transparent) 1px, transparent 1px) 0 0 / 12px 12px,
+    color-mix(in srgb, var(--c) 10%, var(--surface));
 }
-.ico svg { width: 24px; height: 24px; }
-.card h3 { margin: 4px 0 0; font: 600 22px/1.1 var(--font-display); text-wrap: balance; }
-.card p { margin: 0; font-size: 15px; }
-.who { color: var(--muted); font-size: 14px; }
-.spec { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 13px; margin: 0; }
-.spec dt { font: 500 11px/1.6 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
-.spec dd { margin: 0; font-family: var(--font-mono); font-size: 12.5px; min-width: 0; overflow-wrap: anywhere; }
-.proc { display: flex; flex-wrap: wrap; gap: 6px; }
-.tag { font: 500 12px/1 var(--font-mono); border: 1px solid var(--line); border-radius: 4px; padding: 5px 7px; }
-.tag.solo { border-color: var(--good); color: var(--good); }
-.tip { font-size: 14px; border-left: 2px solid var(--spark); padding-left: 10px; }
+.thumb svg { width: 40%; height: 40%; }
+.info { min-width: 0; display: grid; gap: 3px; }
+.cat { font: 600 11px/1.2 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--c); }
+.item h3 { margin: 0; font: 600 17px/1.2 var(--font-body); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 2px; }
+.precio { font: 700 16px/1 var(--font-body); font-variant-numeric: tabular-nums; }
+.pill { font-size: 12px; font-weight: 600; line-height: 1; padding: 4px 7px; border-radius: 6px; border: 1px solid var(--line); color: var(--muted); }
+.pill.ok { color: var(--good); border-color: color-mix(in srgb, var(--good) 40%, transparent); }
 
-.money {
-  border-top: 1px dashed var(--line);
-  padding-top: 12px;
-  display: grid;
-  font-variant-numeric: tabular-nums;
-}
-.money div small { display: block; font: 500 11px/1.4 var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
-.money div b { font: 600 16px/1.2 var(--font-body); }
-.money .precio b { color: var(--accent); }
-.links { display: flex; flex-wrap: wrap; gap: 8px; }
-.links a {
-  font: 600 14px/1 var(--font-body);
-  color: var(--accent);
-  text-decoration: none;
-  border: 1px solid var(--accent);
-  border-radius: 6px;
-  padding: 8px 12px;
-}
-.links a:hover { background: var(--accent-soft); }
+.empty { color: var(--muted); padding: 40px 0; text-align: center; }
+.note { color: var(--muted); font-size: 13px; padding-top: 28px; max-width: 70ch; }
 
-.empty, .note { color: var(--muted); padding-block: 32px; }
-.note { font-size: 13px; max-width: 70ch; padding-block: 32px 0; }
-@media (prefers-reduced-motion: no-preference) { .card { transition: border-color .15s; } .card:hover { border-color: var(--accent); } }
+@media (prefers-reduced-motion: no-preference) {
+  .item { transition: transform .12s ease, border-color .15s; }
+  .item:active { transform: scale(.985); }
+}
+@media (hover: hover) { .item:hover { border-color: var(--c); } }
+
+/* Escritorio y tableta: tarjetas en rejilla */
+@media (min-width: 720px) {
+  .hero { padding-block: 40px 44px; }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  .item { grid-template-columns: 1fr; padding: 10px; align-items: start; }
+  .thumb { aspect-ratio: 16 / 9; }
+  .thumb svg { width: 22%; height: 22%; }
+  .info { padding: 4px 6px 6px; }
+}
+
+/* Hojas inferiores (detalle y filtros) */
+dialog {
+  border: 0; padding: 0; margin: auto auto 0; width: 100%; max-width: 640px;
+  max-height: 90dvh; border-radius: 20px 20px 0 0;
+  background: var(--surface); color: var(--ink);
+}
+dialog::backdrop { background: rgba(5, 9, 14, .55); }
+@media (prefers-reduced-motion: no-preference) {
+  dialog[open] { animation: subir .22s cubic-bezier(.2, .8, .2, 1); }
+  @keyframes subir { from { transform: translateY(40px); opacity: .4; } }
+}
+@media (min-width: 720px) { dialog { margin: auto; border-radius: 20px; } }
+.sheet { display: flex; flex-direction: column; max-height: 90dvh; }
+.sheet-body {
+  overflow-y: auto; overscroll-behavior: contain;
+  padding: 8px max(20px, env(safe-area-inset-right, 0px)) 16px max(20px, env(safe-area-inset-left, 0px));
+  display: grid; gap: 18px; grid-auto-rows: max-content;
+}
+.grabber { width: 40px; height: 5px; border-radius: 3px; background: var(--line); margin: 10px auto 0; flex: none; }
+.cerrar {
+  position: absolute; top: 12px; right: max(12px, env(safe-area-inset-right, 0px)); width: 36px; height: 36px; border-radius: 50%;
+  border: 0; background: color-mix(in srgb, var(--ink) 8%, transparent); cursor: pointer; display: grid; place-items: center;
+}
+.cerrar svg { width: 18px; height: 18px; }
+.d-thumb { --c: var(--c-taller); aspect-ratio: 16 / 6; max-width: 100%; border-radius: 14px; margin-top: 8px; }
+.d-thumb svg { width: 18%; height: 30%; }
+.d-title { display: grid; gap: 6px; }
+.d-title h2 { margin: 0; font: 700 30px/1.02 var(--font-display); text-transform: uppercase; text-wrap: balance; }
+.d-precio { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.d-precio b { font: 700 26px/1 var(--font-body); font-variant-numeric: tabular-nums; }
+.d-precio span { color: var(--muted); font-size: 14px; }
+.d-desc { margin: 0; font-size: 16px; }
+.facts { display: grid; gap: 0; margin: 0; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.facts div { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 12px; padding: 12px 14px; border-top: 1px solid var(--line); }
+.facts div:first-child { border-top: 0; }
+.facts dt { font: 600 11px/1.6 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.facts dd { margin: 0; font-size: 15px; min-width: 0; overflow-wrap: anywhere; }
+.procs { display: flex; flex-wrap: wrap; gap: 6px; }
+.tip { margin: 0; padding: 14px; border-radius: 12px; background: color-mix(in srgb, var(--spark) 10%, var(--surface)); font-size: 15px; }
+.tip strong { display: block; font: 600 11px/1.6 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--spark); }
+.acciones {
+  flex: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  padding: 12px max(20px, env(safe-area-inset-right, 0px)) max(14px, env(safe-area-inset-bottom, 0px)) max(20px, env(safe-area-inset-left, 0px));
+  border-top: 1px solid var(--line);
+}
+.acciones a {
+  height: 48px; border-radius: 12px; display: grid; place-items: center; text-decoration: none;
+  font-weight: 700; font-size: 15px; text-align: center; padding: 0 8px; line-height: 1.1;
+}
+.a-pin { background: var(--ink); color: var(--bg); }
+.a-ml { border: 1.5px solid var(--ink); color: var(--ink); }
+
+.f-grupo { display: grid; gap: 10px; }
+.f-grupo h3 { margin: 0; font: 600 12px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 4px; padding: 4px; background: var(--bg); border-radius: 12px; }
+.seg button { height: 40px; border: 0; border-radius: 9px; background: transparent; font-weight: 600; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--surface); box-shadow: var(--shadow); }
+.toggle { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px; border: 1px solid var(--line); border-radius: 12px; cursor: pointer; }
+.toggle small { display: block; color: var(--muted); font-size: 13px; }
+.toggle input { width: 22px; height: 22px; accent-color: var(--accent); flex: none; }
+.f-titulo { margin: 0; padding-top: 8px; font: 700 26px/1 var(--font-display); text-transform: uppercase; }
+.btn-primario { height: 48px; border-radius: 12px; border: 0; background: var(--ink); color: var(--bg); font-weight: 700; cursor: pointer; }
+.btn-texto { height: 48px; border-radius: 12px; border: 1.5px solid var(--line); background: transparent; font-weight: 700; cursor: pointer; }
 </style>
 
-<div class="wrap">
-  <header>
-    <div class="eyebrow">Fibra 1000 W · lámina e inoxidable · precios en MXN</div>
-    <h1>Catálogo <span>Láser CNC</span></h1>
-    <p class="lead">Productos de metal que se venden bien y se pueden fabricar con una cortadora láser de fibra de 1000 W. Cada día se agrega un lote nuevo de 30 ideas con material, procesos y precio de venta sugerido.</p>
-    <div class="stats" id="stats">
-      <div class="stat"><b id="st-total">—</b><small>Productos</small></div>
-      <div class="stat"><b id="st-lotes">—</b><small>Lotes diarios</small></div>
-      <div class="stat"><b id="st-solo">—</b><small>Salen 100% del láser</small></div>
-      <div class="stat"><b id="st-ultimo">—</b><small>Último lote</small></div>
-    </div>
-  </header>
-
-  <div class="toolbar">
-    <div class="row">
-      <input type="search" id="q" placeholder="Buscar: tortilladora, brasero, inoxidable…" aria-label="Buscar productos">
-      <select id="dif" aria-label="Dificultad">
-        <option value="">Cualquier dificultad</option>
-        <option>Fácil</option><option>Media</option><option>Avanzada</option>
-      </select>
-      <select id="orden" aria-label="Ordenar">
-        <option value="nuevo">Más nuevos primero</option>
-        <option value="precio">Precio más alto</option>
-      </select>
-      <label class="check"><input type="checkbox" id="solo"> Solo láser, sin soldar</label>
-    </div>
-    <div class="row">
-      <div class="chips" id="cats" role="group" aria-label="Categorías"></div>
-      <span class="count" id="count"></span>
+<header class="hero gutter">
+  <div class="inner">
+    <div class="brand"><i aria-hidden="true"></i>Fibra 1000 W · Taller</div>
+    <h1>Catálogo <em>Láser</em> CNC</h1>
+    <p class="lead">Ideas de productos en metal que se venden bien. Cada día llegan 30 nuevas.</p>
+    <div class="stats">
+      <div class="stat"><b id="st-total">—</b><small>ideas</small></div>
+      <div class="stat"><b id="st-hoy">—</b><small id="st-hoy-l">del último lote</small></div>
+      <div class="stat"><b id="st-solo">—</b><small>sin soldar</small></div>
     </div>
   </div>
+</header>
 
-  <main id="lista"><p class="empty">Cargando productos…</p></main>
-
-  <p class="note">Los precios de venta son referencias aproximadas para México. Antes de fijar tu precio revisa los enlaces de Mercado Libre de cada producto. Los enlaces de Pinterest abren búsquedas de ideas para diseño.</p>
+<div class="bar gutter">
+  <div class="inner">
+    <div class="search-row">
+      <label class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input type="search" id="q" placeholder="Buscar ideas" aria-label="Buscar productos" enterkeyhint="search">
+      </label>
+      <button class="btn-filtros" id="abrir-filtros" type="button" aria-label="Filtros">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+        <span>Filtros</span><span class="n" id="n-filtros" hidden></span>
+      </button>
+    </div>
+    <div class="chips" id="cats" role="group" aria-label="Categorías"></div>
+  </div>
 </div>
 
+<main class="gutter">
+  <div class="inner">
+    <div id="lista"><p class="empty">Cargando ideas…</p></div>
+    <p class="note">Los precios de venta son referencias aproximadas para México. Antes de fijar el tuyo revisa el botón de Mercado Libre de cada producto.</p>
+  </div>
+</main>
+
+<dialog id="detalle" aria-labelledby="d-nombre">
+  <div class="sheet">
+    <div class="grabber" aria-hidden="true"></div>
+    <button class="cerrar" type="button" data-cerrar aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <div class="sheet-body" id="d-body"></div>
+    <div class="acciones">
+      <a id="d-pin" class="a-pin" target="_blank" rel="noopener">Ideas en Pinterest</a>
+      <a id="d-ml" class="a-ml" target="_blank" rel="noopener">Mercado Libre</a>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="filtros" aria-labelledby="f-titulo">
+  <div class="sheet">
+    <div class="grabber" aria-hidden="true"></div>
+    <button class="cerrar" type="button" data-cerrar aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <div class="sheet-body">
+      <h2 class="f-titulo" id="f-titulo">Filtros</h2>
+      <div class="f-grupo">
+        <h3>Ordenar</h3>
+        <div class="seg" id="f-orden">
+          <button type="button" data-v="nuevo" aria-pressed="true">Más nuevos</button>
+          <button type="button" data-v="precio" aria-pressed="false">Precio más alto</button>
+        </div>
+      </div>
+      <div class="f-grupo">
+        <h3>Dificultad</h3>
+        <div class="seg" id="f-dif">
+          <button type="button" data-v="" aria-pressed="true">Todas</button>
+          <button type="button" data-v="Fácil" aria-pressed="false">Fácil</button>
+          <button type="button" data-v="Media" aria-pressed="false">Media</button>
+          <button type="button" data-v="Avanzada" aria-pressed="false">Avanzada</button>
+        </div>
+      </div>
+      <label class="toggle" for="solo">
+        <span><strong>Solo láser</strong><small>Productos que no llevan soldadura</small></span>
+        <input type="checkbox" id="solo">
+      </label>
+    </div>
+    <div class="acciones">
+      <button type="button" class="btn-texto" id="f-limpiar">Limpiar</button>
+      <button type="button" class="btn-primario" id="f-ver">Ver ideas</button>
+    </div>
+  </div>
+</dialog>
+
 <script>
-const ICONOS = {
-  "Cocina comercial": '<path d="M3 11h14a0 0 0 0 1 0 0v3a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4v-3z"/><path d="M17 12h4"/><path d="M7 4c0 2 2 2 2 4M11 4c0 2 2 2 2 4"/>',
-  "Asadores y fuego": '<path d="M12 3c1 4 5 5 5 10a5 5 0 0 1-10 0c0-3 2-4 2-6 1 1 2 2 3 2 0-2-1-4 0-6z"/><path d="M5 21h14"/>',
-  "Rancho y campo": '<path d="M6 4v8a6 6 0 0 0 12 0V4"/><path d="M4 4h4M16 4h4"/><path d="M8 9h.01M16 9h.01"/>',
-  "Hogar y decoración": '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
-  "Negocio y señalética": '<rect x="3" y="7" width="18" height="10" rx="1"/><path d="M8 7l4-4 4 4"/><path d="M7 12h10"/>',
-  "Taller y herramientas": '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/>'
+const CATS = {
+  "Cocina comercial":      { c: "--c-cocina",  corto: "Cocina",   ico: '<path d="M3 11h14v3a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4v-3z"/><path d="M17 12h4"/><path d="M7 4c0 2 2 2 2 4M11 4c0 2 2 2 2 4"/>' },
+  "Asadores y fuego":      { c: "--c-fuego",   corto: "Asadores", ico: '<path d="M12 3c1 4 5 5 5 10a5 5 0 0 1-10 0c0-3 2-4 2-6 1 1 2 2 3 2 0-2-1-4 0-6z"/><path d="M5 21h14"/>' },
+  "Rancho y campo":        { c: "--c-rancho",  corto: "Rancho",   ico: '<path d="M6 4v8a6 6 0 0 0 12 0V4"/><path d="M4 4h4M16 4h4"/><path d="M8 9h.01M16 9h.01"/>' },
+  "Hogar y decoración":    { c: "--c-hogar",   corto: "Hogar",    ico: '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>' },
+  "Negocio y señalética":  { c: "--c-negocio", corto: "Negocio",  ico: '<rect x="3" y="7" width="18" height="10" rx="1"/><path d="M8 7l4-4 4 4"/><path d="M7 12h10"/>' },
+  "Taller y herramientas": { c: "--c-taller",  corto: "Taller",   ico: '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/>' }
 };
-const CATEGORIAS = Object.keys(ICONOS);
+const cat = p => CATS[p.categoria] || CATS["Taller y herramientas"];
+const svg = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
 const pesos = n => "$" + n.toLocaleString("es-MX");
-const rango = ([a, b]) => a === b ? pesos(a) : `${pesos(a)}–${pesos(b)}`;
+const rango = ([a, b]) => a === b ? pesos(a) : `${pesos(a)} – ${pesos(b)}`;
 const soloLaser = p => !p.procesos.includes("Soldadura");
-const fechaLarga = f => new Date(f + "T12:00:00").toLocaleDateString("es-MX", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+const hoyISO = new Date().toLocaleDateString("en-CA", { timeZone: "America/Mexico_City" });
+const fechaCorta = f => new Date(f + "T12:00:00").toLocaleDateString("es-MX", { weekday: "long", day: "numeric", month: "long" });
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const $ = id => document.getElementById(id);
 
 let productos = [];
 const estado = { q: "", cat: "", dif: "", orden: "nuevo", solo: false };
 
-function ficha(p) {
-  const pin = "https://www.pinterest.com/search/pins/?q=" + encodeURIComponent(p.busqueda);
-  const ml = "https://listado.mercadolibre.com.mx/" + encodeURIComponent(p.nombre.toLowerCase().replace(/\s+/g, "-"));
-  const procs = p.procesos.map(x => `<span class="tag">${esc(x)}</span>`).join("") +
-    (soloLaser(p) ? '<span class="tag solo">Sin soldadura</span>' : "");
-  return `<article class="card">
-    <div class="card-top">
-      <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICONOS[p.categoria] || ICONOS["Taller y herramientas"]}</svg></div>
-      <div><div class="eyebrow">${esc(p.categoria)} · ${esc(p.dificultad)}</div><h3>${esc(p.nombre)}</h3></div>
-    </div>
-    <p>${esc(p.descripcion)}</p>
-    <div style="display:grid;gap:10px;align-content:start">
-      <p class="who"><strong>Para quién:</strong> ${esc(p.cliente)}</p>
-      <dl class="spec"><dt>Material</dt><dd>${esc(p.material)}</dd></dl>
-      <div class="proc">${procs}</div>
-      <p class="tip">${esc(p.tip)}</p>
-    </div>
-    <div class="money">
-      <div class="precio"><small>Se vende en</small><b>${rango(p.precio_mxn)}</b></div>
-    </div>
-    <div class="links">
-      <a href="${pin}" target="_blank" rel="noopener">Ideas en Pinterest</a>
-      <a href="${ml}" target="_blank" rel="noopener">Precios en Mercado Libre</a>
-    </div>
-  </article>`;
+function item(p) {
+  const k = cat(p);
+  return `<button class="item" type="button" data-id="${esc(p.id)}" style="--c: var(${k.c})">
+    <span class="thumb">${svg(k.ico)}</span>
+    <span class="info">
+      <span class="cat">${esc(k.corto)} · ${esc(p.dificultad)}</span>
+      <h3>${esc(p.nombre)}</h3>
+      <span class="meta"><span class="precio">${rango(p.precio_mxn)}</span>${soloLaser(p) ? '<span class="pill ok">Sin soldar</span>' : ""}</span>
+    </span>
+  </button>`;
 }
 
 function filtrar() {
@@ -273,14 +373,16 @@ function filtrar() {
 }
 
 function pintar() {
-  const lista = document.getElementById("lista");
+  const lista = $("lista");
   const vis = filtrar();
-  document.getElementById("count").textContent = `${vis.length} de ${productos.length}`;
-  if (!vis.length) { lista.innerHTML = '<p class="empty">Ningún producto coincide con esos filtros. Prueba con otra categoría o borra la búsqueda.</p>'; return; }
+  const activos = (estado.dif ? 1 : 0) + (estado.solo ? 1 : 0) + (estado.orden !== "nuevo" ? 1 : 0);
+  $("n-filtros").hidden = !activos;
+  $("n-filtros").textContent = activos;
 
-  if (estado.orden !== "nuevo") {
+  if (!vis.length) { lista.innerHTML = '<p class="empty">No hay ideas con esos filtros.<br>Prueba otra categoría o borra la búsqueda.</p>'; return; }
+  if (estado.orden === "precio") {
     vis.sort((a, b) => b.precio_mxn[1] - a.precio_mxn[1]);
-    lista.innerHTML = `<section class="lote"><div class="grid">${vis.map(ficha).join("")}</div></section>`;
+    lista.innerHTML = `<p class="resumen">${vis.length} ideas, de mayor a menor precio</p><section class="lote"><div class="grid">${vis.map(item).join("")}</div></section>`;
     return;
   }
   const ultimo = productos.reduce((m, p) => p.fecha > m ? p.fecha : m, "");
@@ -288,41 +390,86 @@ function pintar() {
   vis.forEach(p => (lotes[p.fecha] ||= []).push(p));
   lista.innerHTML = Object.keys(lotes).sort().reverse().map(f => `
     <section class="lote">
-      <h2>Lote del ${esc(fechaLarga(f))} <small>${lotes[f].length} productos</small>${f === ultimo ? '<span class="new">NUEVO</span>' : ""}</h2>
-      <div class="grid">${lotes[f].map(ficha).join("")}</div>
+      <div class="lote-head">
+        <h2>${f === hoyISO ? "Hoy" : esc(fechaCorta(f))}</h2>
+        <small>${f === hoyISO ? esc(fechaCorta(f)) + " · " : ""}${lotes[f].length} ideas</small>
+        ${f === ultimo ? '<span class="badge-new">NUEVO</span>' : ""}
+      </div>
+      <div class="grid">${lotes[f].map(item).join("")}</div>
     </section>`).join("");
+}
+
+function abrirDetalle(p) {
+  const k = cat(p);
+  $("d-body").innerHTML = `
+    <div class="thumb d-thumb" style="--c: var(${k.c})">${svg(k.ico)}</div>
+    <div class="d-title">
+      <span class="cat" style="--c: var(${k.c})">${esc(p.categoria)} · ${esc(p.dificultad)}</span>
+      <h2 id="d-nombre">${esc(p.nombre)}</h2>
+    </div>
+    <div class="d-precio"><b>${rango(p.precio_mxn)}</b><span>precio de venta en México</span></div>
+    <p class="d-desc">${esc(p.descripcion)}</p>
+    <dl class="facts">
+      <div><dt>Para quién</dt><dd>${esc(p.cliente)}</dd></div>
+      <div><dt>Material</dt><dd>${esc(p.material)}</dd></div>
+      <div><dt>Proceso</dt><dd class="procs">${p.procesos.map(x => `<span class="pill">${esc(x)}</span>`).join("")}</dd></div>
+    </dl>
+    <p class="tip"><strong>Consejo de venta</strong>${esc(p.tip)}</p>`;
+  $("d-pin").href = "https://www.pinterest.com/search/pins/?q=" + encodeURIComponent(p.busqueda);
+  $("d-ml").href = "https://listado.mercadolibre.com.mx/" + encodeURIComponent(p.nombre.toLowerCase().replace(/\s+/g, "-"));
+  $("detalle").showModal();
+  $("d-body").scrollTop = 0;
+}
+
+function marcar(grupo, v) {
+  grupo.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === v));
 }
 
 function iniciar(data) {
   productos = data;
-  const fechas = [...new Set(data.map(p => p.fecha))].sort();
-  document.getElementById("st-total").textContent = data.length;
-  document.getElementById("st-lotes").textContent = fechas.length;
-  document.getElementById("st-solo").textContent = data.filter(soloLaser).length;
-  document.getElementById("st-ultimo").textContent = fechas.length ? new Date(fechas.at(-1) + "T12:00:00").toLocaleDateString("es-MX", { day: "numeric", month: "short" }) : "—";
+  const ultimo = data.reduce((m, p) => p.fecha > m ? p.fecha : m, "");
+  $("st-total").textContent = data.length;
+  $("st-hoy").textContent = data.filter(p => p.fecha === ultimo).length;
+  $("st-hoy-l").textContent = ultimo === hoyISO ? "nuevas hoy" : "del último lote";
+  $("st-solo").textContent = data.filter(soloLaser).length;
 
-  const cats = document.getElementById("cats");
-  const usadas = CATEGORIAS.filter(c => data.some(p => p.categoria === c));
-  cats.innerHTML = ['<button class="chip" data-cat="" aria-pressed="true">Todas</button>']
-    .concat(usadas.map(c => `<button class="chip" data-cat="${esc(c)}" aria-pressed="false">${esc(c)}</button>`)).join("");
-  cats.addEventListener("click", e => {
-    const b = e.target.closest(".chip"); if (!b) return;
-    estado.cat = b.dataset.cat;
-    cats.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", x === b));
-    pintar();
-  });
+  const usadas = Object.keys(CATS).filter(c => data.some(p => p.categoria === c));
+  $("cats").innerHTML = ['<button class="chip" type="button" data-cat="" aria-pressed="true">Todas</button>']
+    .concat(usadas.map(c => `<button class="chip" type="button" data-cat="${esc(c)}" aria-pressed="false" style="--c: var(${CATS[c].c})"><span class="dot"></span>${esc(CATS[c].corto)}</button>`)).join("");
   pintar();
 }
 
-document.getElementById("q").addEventListener("input", e => { estado.q = e.target.value; pintar(); });
-document.getElementById("dif").addEventListener("change", e => { estado.dif = e.target.value; pintar(); });
-document.getElementById("orden").addEventListener("change", e => { estado.orden = e.target.value; pintar(); });
-document.getElementById("solo").addEventListener("change", e => { estado.solo = e.target.checked; pintar(); });
+$("cats").addEventListener("click", e => {
+  const b = e.target.closest(".chip"); if (!b) return;
+  estado.cat = b.dataset.cat;
+  $("cats").querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", x === b));
+  b.scrollIntoView({ inline: "nearest", block: "nearest", behavior: "smooth" });
+  pintar();
+});
+$("lista").addEventListener("click", e => {
+  const b = e.target.closest(".item"); if (!b) return;
+  const p = productos.find(x => x.id === b.dataset.id);
+  if (p) abrirDetalle(p);
+});
+$("q").addEventListener("input", e => { estado.q = e.target.value; pintar(); });
+$("q").addEventListener("keydown", e => { if (e.key === "Enter") e.target.blur(); });
+
+$("abrir-filtros").addEventListener("click", () => $("filtros").showModal());
+$("f-orden").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; estado.orden = b.dataset.v; marcar($("f-orden"), b.dataset.v); pintar(); });
+$("f-dif").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; estado.dif = b.dataset.v; marcar($("f-dif"), b.dataset.v); pintar(); });
+$("solo").addEventListener("change", e => { estado.solo = e.target.checked; pintar(); });
+$("f-limpiar").addEventListener("click", () => {
+  Object.assign(estado, { dif: "", orden: "nuevo", solo: false });
+  marcar($("f-orden"), "nuevo"); marcar($("f-dif"), ""); $("solo").checked = false; pintar();
+});
+$("f-ver").addEventListener("click", () => { $("filtros").close(); window.scrollTo({ top: $("lista").offsetTop - 140, behavior: "smooth" }); });
+
+document.querySelectorAll("dialog").forEach(d => {
+  d.addEventListener("click", e => { if (e.target === d || e.target.closest("[data-cerrar]")) d.close(); });
+});
 
 fetch("productos.json", { cache: "no-store" })
   .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
   .then(iniciar)
-  .catch(() => {
-    document.getElementById("lista").innerHTML = '<p class="empty">No se pudo cargar productos.json. Si abriste el archivo directo desde tu computadora, usa la versión publicada o un servidor local (python3 -m http.server).</p>';
-  });
+  .catch(() => { $("lista").innerHTML = '<p class="empty">No se pudieron cargar las ideas. Recarga la página en un momento.</p>'; });
 </script>
