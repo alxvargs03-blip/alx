@@ -19,7 +19,7 @@ Cada día se agregan **30 productos nuevos** a `productos.json` y se republica l
    - `costo_mxn` y `precio_mxn`: `[min, max]` en pesos enteros. Costo = material + corte.
    - `busqueda`: texto corto para buscar ideas en Pinterest.
    - Escribe en español de México, frases cortas y concretas.
-6. Restricciones de la máquina: láser de **fibra 1000 W**. Corta acero al carbón hasta ~8–10 mm, inoxidable hasta ~3–4 mm, aluminio hasta ~2–3 mm. No corta madera ni acrílico. Prioriza productos para negocios y venta al público en México (cocina comercial, asadores, rancho, decoración, señalética, taller) con buen margen.
+6. Restricciones de la máquina: láser de **fibra 1000 W**. Corta acero al carbón hasta ~8–10 mm, inoxidable hasta ~3–4 mm, aluminio hasta ~2–3 mm. No corta madera ni acrílico. El taller **también tiene dobladora y soldadora**, así que se valen productos que lleven doblez y soldadura (incluye algunos de ticket alto). El catálogo es para uso interno: ideas para fabricar y vender, no para mostrar a clientes. Prioriza productos para negocios y venta al público en México (cocina comercial, asadores, rancho, decoración, señalética, taller) con buen margen.
 7. Valida: `python3 catalogo-laser/validar.py`. Corrige hasta que diga OK.
 8. Commit (`Catálogo láser: lote del AAAA-MM-DD (30 productos)`) y `git push -u origin ccr-7e072d5b-crtg26`.
 9. Republica la página con la herramienta Artifact: primero `action: "read"` con la URL de arriba, después `publish` con esa misma `url`, `file_path` = `catalogo-laser/index.html` y `files` = `{"productos.json": "catalogo-laser/productos.json"}`.
