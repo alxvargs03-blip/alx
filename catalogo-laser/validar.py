@@ -47,6 +47,13 @@ def main():
             r = p.get(campo)
             if not (isinstance(r, list) and len(r) == 2 and all(isinstance(n, int) and n > 0 for n in r) and r[0] <= r[1]):
                 errores.append(f"{donde}: '{campo}' debe ser [min, max] en pesos")
+        pines = p.get("pinterest")
+        if not (isinstance(pines, list) and pines and all(
+            isinstance(x, dict) and str(x.get("titulo", "")).strip()
+            and re.match(r"https://([a-z]{2}\.|www\.)?pinterest\.[a-z.]+/", str(x.get("url", "")))
+            for x in pines
+        )):
+            errores.append(f"{donde}: 'pinterest' debe tener al menos un pin con titulo y url de Pinterest")
         if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", p.get("fecha", "")):
             errores.append(f"{donde}: fecha debe ser AAAA-MM-DD")
 
